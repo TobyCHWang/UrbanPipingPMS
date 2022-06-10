@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useNavigate } from 'react-router-dom';
 import EmployeeService from '../service/EmployeeService';
 
 class ListEmployeeComponent extends Component {
@@ -8,6 +9,11 @@ class ListEmployeeComponent extends Component {
         this.state = {
             employees:[]
         }
+
+        this.addEmployee = this.addEmployee.bind(this);
+        this.editEmployee = this.editEmployee.bind(this);
+        this.deleteEmployee = this.deleteEmployee.bind(this);
+        this.viewEmployee = this.viewEmployee.bind(this);
     }
 
     componentDidMount() {
@@ -16,12 +22,30 @@ class ListEmployeeComponent extends Component {
         })
     }
 
+    addEmployee() {
+        this.props.navigate('/add-employee/_add');
+    }
+
+    editEmployee(id) {
+        this.props.navigate(`/add-employee/${id}`);
+    }
+
+    deleteEmployee(id) {
+        EmployeeService.deleteEmployee(id).then(res => {
+            this.setState({employees:this.state.employees.filter(employee => employee.employeeId !== id)});
+        });
+    }
+
+    viewEmployee(id) {
+        this.props.navigate(`/view-employee/${id}`);
+    }
+
     render() {
         return (
             <div>
                 <h2 className='text-center'>Employee List</h2>
                 <div className='row'>
-                    <button className='btn btn-primary'>
+                    <button className='btn btn-primary' onClick={this.addEmployee}>
                         Add Employee
                     </button>
                 </div>
@@ -52,13 +76,13 @@ class ListEmployeeComponent extends Component {
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <button className='btn btn-info'>
+                                            <button className='btn btn-info' onClick={() => this.editEmployee(employee.employeeId)}>
                                                 Update Employee
                                             </button>
-                                            <button className='btn btn-danger'>
+                                            <button className='btn btn-danger' onClick={() => this.deleteEmployee(employee.employeeId)}>
                                                 Delete Employee
                                             </button>
-                                            <button className='btn btn-info'>
+                                            <button className='btn btn-info' onClick={() => this.viewEmployee(employee.employeeId)}>
                                                 View Employee
                                             </button>
                                         </td>
@@ -74,4 +98,11 @@ class ListEmployeeComponent extends Component {
     }
 }
 
-export default ListEmployeeComponent;
+// export default ListEmployeeComponent;
+
+function WithNavigate(props) {
+    let navigate = useNavigate();
+    return <ListEmployeeComponent {...props} navigate={navigate} />
+}
+
+export default WithNavigate;
