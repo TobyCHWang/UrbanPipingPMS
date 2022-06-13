@@ -57,9 +57,9 @@ class ListEmployeeComponent extends Component {
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Contact No.</th>
+                                <th>Location</th>
                                 <th>Job Role</th>
                                 <th>Department</th>
-                                <th>Location</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -72,7 +72,7 @@ class ListEmployeeComponent extends Component {
                                         <td>{employee.employeeLastName}</td>
                                         <td>{employee.employeeEmail}</td>
                                         <td>{employee.employeeContact}</td>
-                                        <td></td>
+                                        <td>{employee.employeeLocation}</td>
                                         <td></td>
                                         <td></td>
                                         <td>

@@ -3,39 +3,44 @@ package com.urbanpiping.springboot.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="employees")
+@Table(name = "employees")
 public class Employee {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="empId")
+	@Column(name = "empId")
 	private long employeeId;
-	
-	@Column(name="empFirstName")
+
+	@Column(name = "empFirstName")
 	private String employeeFirstName;
-	
-	@Column(name="empLastName")
+
+	@Column(name = "empLastName")
 	private String employeeLastName;
-	
-	@Column(name="empEmail")
+
+	@Column(name = "empEmail")
 	private String employeeEmail;
-	
-	@Column(name="empContact")
+
+	@Column(name = "empContact")
 	private String employeeContact;
-//	private JobRole jobId;
-//	private Department deptId;
-//	private Location locId;
-	
+
+	@Column(name = "empLocation")
+	private String employeeLocation;
+
+//	private JobRole jobRole;
+//	private Department deptName;
+
 	public Employee() {
 
 	}
 
-	public Employee(String employeeFirstName, String employeeLastName, String employeeEmail, String employeeContact) {
+	public Employee(String employeeFirstName, String employeeLastName, String employeeEmail, String employeeContact,
+			String employeeLocation) {
 		super();
 		this.employeeFirstName = employeeFirstName;
 		this.employeeLastName = employeeLastName;
 		this.employeeEmail = employeeEmail;
 		this.employeeContact = employeeContact;
+		this.employeeLocation = employeeLocation;
 	}
 
 	public long getEmployeeId() {
@@ -78,4 +83,12 @@ public class Employee {
 		this.employeeContact = employeeContact;
 	}
 
+	public String getEmployeeLocation() {
+		return employeeLocation;
+	}
+
+	public void setEmployeeLocation(String employeeLocation) {
+		this.employeeLocation = employeeLocation;
+	}
+	
 }
