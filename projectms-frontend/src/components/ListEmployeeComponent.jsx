@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
-import EmployeeService from '../service/EmployeeService';
+import EmployeeService from '../services/EmployeeService';
 
 class ListEmployeeComponent extends Component {
     constructor(props) {
@@ -23,7 +23,7 @@ class ListEmployeeComponent extends Component {
     }
 
     addEmployee() {
-        this.props.navigate('/add-employee/_add');
+        this.props.navigate(`/add-employee/_add`);
     }
 
     editEmployee(id) {
@@ -77,13 +77,13 @@ class ListEmployeeComponent extends Component {
                                         <td></td>
                                         <td>
                                             <button className='btn btn-info' onClick={() => this.editEmployee(employee.employeeId)}>
-                                                Update Employee
+                                                Update
                                             </button>
                                             <button className='btn btn-danger' onClick={() => this.deleteEmployee(employee.employeeId)}>
-                                                Delete Employee
+                                                Delete
                                             </button>
                                             <button className='btn btn-info' onClick={() => this.viewEmployee(employee.employeeId)}>
-                                                View Employee
+                                                View
                                             </button>
                                         </td>
                                     </tr>
