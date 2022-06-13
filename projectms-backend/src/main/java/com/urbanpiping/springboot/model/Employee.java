@@ -26,7 +26,6 @@ public class Employee {
 //	private Department deptId;
 //	private Location locId;
 	
-	
 	public Employee() {
 
 	}

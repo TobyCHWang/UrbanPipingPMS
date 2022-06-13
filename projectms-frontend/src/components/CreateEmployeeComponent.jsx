@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import EmployeeService from '../service/EmployeeService';
+import EmployeeService from '../services/EmployeeService';
 
 class CreateEmployeeComponent extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class CreateEmployeeComponent extends Component {
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
         this.changeEmailHandler = this.changeEmailHandler.bind(this);
         this.changeContactHandler = this.changeContactHandler.bind(this);
-        this.saveEmployee = this.saveEmployee.bind(this);
+        this.save = this.save.bind(this);
         this.cancel = this.cancel.bind(this);
     }
 
@@ -53,25 +53,25 @@ class CreateEmployeeComponent extends Component {
         this.setState({contact: event.target.value});
     }
 
-    saveEmployee = (e) => {
+    save = (e) => {
         e.preventDefault();
 
-        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId, contact: this.state.contact};
+        let employee = {employeeFirstName: this.state.firstName, employeeLastName: this.state.lastName, employeeEmail: this.state.emailId, employeeContact: this.state.contact};
         console.log('employee =>' + JSON.stringify(employee));
 
         if (this.state.id === '_add') {
             EmployeeService.createEmployee(employee).then(res => {
-                this.props.navigate("/employees");
+                this.props.navigate(`/employees`);
             });
         } else {
             EmployeeService.updateEmployee(employee, this.state.id).then(res => {
-                this.props.navigate('/employees');
+                this.props.navigate(`/employees`);
             });
         }
     }
 
     cancel() {
-        this.props.navigate("/employees");
+        this.props.navigate(`/employees`);
     }
 
     getTitle() {
@@ -96,39 +96,39 @@ class CreateEmployeeComponent extends Component {
                                 <div className='form-group'>
                                     <label>First Name: </label>
                                     <input placeholder='First Name' name='firstName' className='form-control'
-                                        value={this.state.firstName} onChange={this.changeFirstNameHandler}></input>
+                                        value={this.state.firstName} onChange={this.changeFirstNameHandler} />
                                 </div>
                                 <div className='form-group'>
                                     <label>Last Name: </label>
                                     <input placeholder='Last Name' name='lastName' className='form-control'
-                                        value={this.state.lastName} onChange={this.changeLastNameHandler}></input>
+                                        value={this.state.lastName} onChange={this.changeLastNameHandler} />
                                 </div>
                                 <div className='form-group'>
                                     <label>Email: </label>
                                     <input placeholder='Email Address' name='emailId' className='form-control'
-                                        value={this.state.emailId} onChange={this.changeEmailHandler}></input>
+                                        value={this.state.emailId} onChange={this.changeEmailHandler} />
                                 </div>
                                 <div className='form-group'>
                                     <label>Contact No.: </label>
                                     <input placeholder='Contact No.' name='contact' className='form-control'
-                                        value={this.state.contact} onChange={this.changeContactHandler}></input>
+                                        value={this.state.contact} onChange={this.changeContactHandler} />
                                 </div>
                                 <div className='form-group'>
                                     <label>Job Role: </label>
-                                    <input placeholder='Job Role' name='jobRole' className='form-control'></input>
+                                    <input placeholder='Job Role' name='jobRole' className='form-control' />
                                 </div>
                                 <div className='form-group'>
                                     <label>Department: </label>
-                                    <input placeholder='Department' name='department' className='form-control'></input>
+                                    <input placeholder='Department' name='department' className='form-control' />
                                 </div>
                                 <div className='form-group'>
                                     <label>Location: </label>
-                                    <input placeholder='Location' name='location' className='form-control'></input>
+                                    <input placeholder='Location' name='location' className='form-control' />
                                 </div>
                             </form>
                         </div>
                         </div>
-                        <button className='btn btn-success' onClick={this.saveEmployee}>Save</button>
+                        <button className='btn btn-success' onClick={this.save}>Save</button>
                         <button className='btn btn-danger' onClick={this.cancel}>Cancel</button>
                     </div>
                 </div>
