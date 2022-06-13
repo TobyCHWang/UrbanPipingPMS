@@ -5,6 +5,7 @@ import HeaderComponent from './components/HeaderComponent';
 import ListEmployeeComponent from './components/ListEmployeeComponent';
 import CreateEmployeeComponent from './components/CreateEmployeeComponent';
 import ViewEmployeeComponent from './components/ViewEmployeeComponent';
+import HomePageComponent from './components/HomePageComponent';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <Router>
         <div className='container'>
           <Routes>
-            <Route path='/' element={<ListEmployeeComponent />}/>
+            <Route path='/' element={<HomePageComponent />}/>
             <Route path='/employees' element={<ListEmployeeComponent />}/>
             <Route path='/add-employee/:id' element={<CreateEmployeeComponent />}/>
             <Route path='/view-employee/:id' element={<ViewEmployeeComponent />}/>
