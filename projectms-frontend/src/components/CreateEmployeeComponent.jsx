@@ -11,13 +11,15 @@ class CreateEmployeeComponent extends Component {
             firstName: '',
             lastName: '',
             emailId: '',
-            contact: ''
+            contact: '',
+            location: ''
         }
 
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
         this.changeEmailHandler = this.changeEmailHandler.bind(this);
         this.changeContactHandler = this.changeContactHandler.bind(this);
+        this.changeLocationHandler = this.changeLocationHandler.bind(this);
         this.save = this.save.bind(this);
         this.cancel = this.cancel.bind(this);
     }
@@ -31,7 +33,8 @@ class CreateEmployeeComponent extends Component {
                 this.setState({firstName: employee.employeeFirstName,
                     lastName: employee.employeeLastName,
                     emailId: employee.employeeEmail,
-                    contact: employee.employeeContact
+                    contact: employee.employeeContact, 
+                    location: employee.employeeLocation
                 });
             });
         }
@@ -53,10 +56,15 @@ class CreateEmployeeComponent extends Component {
         this.setState({contact: event.target.value});
     }
 
+    changeLocationHandler = (event) => {
+        this.setState({location: event.target.value});
+    }
+
     save = (e) => {
         e.preventDefault();
 
-        let employee = {employeeFirstName: this.state.firstName, employeeLastName: this.state.lastName, employeeEmail: this.state.emailId, employeeContact: this.state.contact};
+        let employee = {employeeFirstName: this.state.firstName, employeeLastName: this.state.lastName, employeeEmail: this.state.emailId, 
+            employeeContact: this.state.contact, employeeLocation: this.state.location};
         console.log('employee =>' + JSON.stringify(employee));
 
         if (this.state.id === '_add') {
@@ -114,16 +122,17 @@ class CreateEmployeeComponent extends Component {
                                         value={this.state.contact} onChange={this.changeContactHandler} />
                                 </div>
                                 <div className='form-group'>
+                                    <label>Location: </label>
+                                    <input placeholder='Location' name='location' className='form-control'
+                                        value={this.state.location} onChange={this.changeLocationHandler} />
+                                </div>
+                                <div className='form-group'>
                                     <label>Job Role: </label>
                                     <input placeholder='Job Role' name='jobRole' className='form-control' />
                                 </div>
                                 <div className='form-group'>
                                     <label>Department: </label>
                                     <input placeholder='Department' name='department' className='form-control' />
-                                </div>
-                                <div className='form-group'>
-                                    <label>Location: </label>
-                                    <input placeholder='Location' name='location' className='form-control' />
                                 </div>
                             </form>
                         </div>
