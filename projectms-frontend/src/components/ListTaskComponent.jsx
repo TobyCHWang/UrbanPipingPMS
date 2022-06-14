@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EmployeeService from '../services/EmployeeService';
 
-class ListEmployeeComponent extends Component {
+class ListTaskComponent extends Component {
     constructor(props) {
         super(props)
         
@@ -102,7 +102,7 @@ class ListEmployeeComponent extends Component {
 
 function WithNavigate(props) {
     let navigate = useNavigate();
-    return <ListEmployeeComponent {...props} navigate={navigate} />
+    return <ListTaskComponent {...props} navigate={navigate} />
 }
 
 export default WithNavigate;
