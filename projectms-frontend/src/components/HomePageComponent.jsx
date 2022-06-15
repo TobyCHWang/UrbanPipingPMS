@@ -13,7 +13,8 @@ class HomePageComponent extends Component {
                      <br/>
                      <Link to='/tasks'>Task</Link>
                      <br/>
-                    {/* <Link>Calendar</Link> */ }
+                    <Link to='/calendar'>Calendar</Link> 
+                    <br/>
                     <Link to='/employees'>Staff</Link>
                     {/* <Link>Client</Link>
                     <Link>User</Link>
