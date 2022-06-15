@@ -20,7 +20,7 @@ import com.urbanpiping.springboot.exception.ResourceNotFoundException;
 import com.urbanpiping.springboot.model.Project;
 import com.urbanpiping.springboot.repository.ProjectRepository;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin (origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/")
 public class ProjectController {
@@ -29,6 +29,7 @@ public class ProjectController {
 	private ProjectRepository projectRepository;
 	
 	// get all project
+	@GetMapping("/projects")
 	public List<Project> getAllProject(){
 		return projectRepository.findAll();
 	}

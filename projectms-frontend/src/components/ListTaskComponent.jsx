@@ -1,88 +1,90 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
-import EmployeeService from '../services/EmployeeService';
+import TaskService from '../services/TaskService';
 
 class ListTaskComponent extends Component {
     constructor(props) {
         super(props)
         
         this.state = {
-            employees:[]
+            tasks:[]
         }
 
-        this.addEmployee = this.addEmployee.bind(this);
-        this.editEmployee = this.editEmployee.bind(this);
-        this.deleteEmployee = this.deleteEmployee.bind(this);
-        this.viewEmployee = this.viewEmployee.bind(this);
+        this.addTask = this.addTask.bind(this);
+        this.editTask = this.editTask.bind(this);
+        this.deleteTask= this.deleteTask.bind(this);
+        this.viewTask = this.viewTask.bind(this);
     }
 
     componentDidMount() {
-        EmployeeService.getEmployees().then((res) => {
-            this.setState({employees:res.data});
+            TaskService.getTasks().then((res) => {
+            this.setState({tasks:res.data});
         })
     }
 
-    addEmployee() {
-        this.props.navigate(`/add-employee/_add`);
+    addTask() {
+        this.props.navigate(`/add-task/_addTask`);
     }
 
-    editEmployee(id) {
-        this.props.navigate(`/add-employee/${id}`);
+    editTask(id) {
+        this.props.navigate(`/add-task/${id}`);
     }
 
-    deleteEmployee(id) {
-        EmployeeService.deleteEmployee(id).then(res => {
-            this.setState({employees:this.state.employees.filter(employee => employee.employeeId !== id)});
+    deleteTask(id) {
+        TaskService.deleteTask(id).then(res => {
+            this.setState({tasks:this.state.tasks.filter(task => task.taskId !== id)});
         });
     }
 
-    viewEmployee(id) {
-        this.props.navigate(`/view-employee/${id}`);
+    viewTask(id) {
+        this.props.navigate(`/view-task/${id}`);
     }
 
     render() {
         return (
             <div>
-                <h2 className='text-center'>Employee List</h2>
+                <h2 className='text-center'>Task List</h2>
                 <div className='row'>
-                    <button className='btn btn-primary' onClick={this.addEmployee}>
-                        Add Employee
+                    <button className='btn btn-primary' onClick={this.addTask}>
+                        Add Task
                     </button>
                 </div>
                 <div className='row'>
                     <table className='table table-striped table-bordered'>
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Contact No.</th>
-                                <th>Job Role</th>
-                                <th>Department</th>
-                                <th>Location</th>
-                                <th>Action</th>
+                                <th>Task Name</th>
+                                <th>Task Description</th>
+                                <th>Task Start Date</th>
+                                <th>Task Due Date</th>
+                                <th>Status</th>
+                                <th>Task Type</th>
+                                <th>Employee</th>
+                                <th>Priority</th>
+                                <th>Photo</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                this.state.employees.map (
-                                    employee =>
-                                    <tr key = {employee.employeeId}>
-                                        <td>{employee.employeeFirstName}</td>
-                                        <td>{employee.employeeLastName}</td>
-                                        <td>{employee.employeeEmail}</td>
-                                        <td>{employee.employeeContact}</td>
+                                this.state.tasks.map (
+                                    task =>
+                                    <tr key = {task.taskId}>
+                                        <td>{task.taskName}</td>
+                                        <td>{task.taskDesc}</td>
+                                        <td>{task.taskStartDate}</td>
+                                        <td>{task.taskDueDate}</td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <button className='btn btn-info' onClick={() => this.editEmployee(employee.employeeId)}>
+                                            <button className='btn btn-info' onClick={() => this.editTask(task.taskId)}>
                                                 Update
                                             </button>
-                                            <button className='btn btn-danger' onClick={() => this.deleteEmployee(employee.employeeId)}>
+                                            <button className='btn btn-danger' onClick={() => this.deleteTask(task.taskId)}>
                                                 Delete
                                             </button>
-                                            <button className='btn btn-info' onClick={() => this.viewEmployee(employee.employeeId)}>
+                                            <button className='btn btn-info' onClick={() => this.viewTask(task.taskId)}>
                                                 View
                                             </button>
                                         </td>
