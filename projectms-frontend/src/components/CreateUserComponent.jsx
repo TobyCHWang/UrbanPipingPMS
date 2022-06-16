@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import EmployeeService from '../services/EmployeeService';
+import UserService from '../services/UserService';
 
-class CreateEmployeeComponent extends Component {
+class CreateUserComponent extends Component {
     constructor(props) {
         super(props)
 
@@ -11,15 +11,17 @@ class CreateEmployeeComponent extends Component {
             firstName: '',
             lastName: '',
             emailId: '',
-            contact: '',
-            location: ''
+            password: '',
+            status: ''
+            // role: ''
         }
 
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
         this.changeEmailHandler = this.changeEmailHandler.bind(this);
-        this.changeContactHandler = this.changeContactHandler.bind(this);
-        this.changeLocationHandler = this.changeLocationHandler.bind(this);
+        this.changePasswordHandler = this.changePasswordHandler.bind(this);
+        this.changeStatusHandler = this.changeStatusHandler.bind(this);
+        // this.changeRoleHandler = this.changeRoleHandler.bind(this);
         this.save = this.save.bind(this);
         this.cancel = this.cancel.bind(this);
     }
@@ -28,14 +30,15 @@ class CreateEmployeeComponent extends Component {
         if (this.state.id === '_add') {
             return;
         } else {
-            EmployeeService.getEmployeeById(this.state.id).then((res) => {
-                let employee = res.data;
+            UserService.getUserById(this.state.id).then((res) => {
+                let user = res.data;
                 this.setState({
-                    firstName: employee.employeeFirstName,
-                    lastName: employee.employeeLastName,
-                    emailId: employee.employeeEmail,
-                    contact: employee.employeeContact,
-                    location: employee.employeeLocation
+                    firstName: user.userFirstName,
+                    lastName: user.userLastName,
+                    emailId: user.userEmail,
+                    password: user.userPassword,
+                    status: user.userStatus
+                    // role: user.userRole,
                 });
             });
         }
@@ -53,43 +56,47 @@ class CreateEmployeeComponent extends Component {
         this.setState({ emailId: event.target.value });
     }
 
-    changeContactHandler = (event) => {
-        this.setState({ contact: event.target.value });
+    changePasswordHandler = (event) => {
+        this.setState({ password: event.target.value });
     }
 
-    changeLocationHandler = (event) => {
-        this.setState({ location: event.target.value });
+    changeStatusHandler = (event) => {
+        this.setState({ status: event.target.value });
     }
+
+    // changeRoleHandler = (event) => {
+    //     this.setState({ role: event.target.value });
+    // }
 
     save = (e) => {
         e.preventDefault();
 
-        let employee = {
-            employeeFirstName: this.state.firstName, employeeLastName: this.state.lastName, employeeEmail: this.state.emailId,
-            employeeContact: this.state.contact, employeeLocation: this.state.location
-        };
-        console.log('employee =>' + JSON.stringify(employee));
+        let user = {
+            userFirstName: this.state.firstName, userLastName: this.state.lastName, userEmail: this.state.emailId,
+            userPassword: this.state.password, userStatus: this.state.status
+        }
+        console.log('user =>' + JSON.stringify(user));
 
         if (this.state.id === '_add') {
-            EmployeeService.createEmployee(employee).then(res => {
-                this.props.navigate(`/employees`);
+            UserService.createUser(user).then(res => {
+                this.props.navigate(`/users`);
             });
         } else {
-            EmployeeService.updateEmployee(employee, this.state.id).then(res => {
-                this.props.navigate(`/employees`);
+            UserService.updateUser(user, this.state.id).then(res => {
+                this.props.navigate(`/users`);
             });
         }
     }
 
     cancel() {
-        this.props.navigate(`/employees`);
+        this.props.navigate(`/users`);
     }
 
     getTitle() {
         if (this.state.id === '_add') {
-            return <h3 className='text-center'>Add Employee</h3>
+            return <h3 className='text-center'>Add User</h3>
         } else {
-            return <h3 className='text-center'>Update Employee</h3>
+            return <h3 className='text-center'>Update User</h3>
         }
     }
 
@@ -104,7 +111,7 @@ class CreateEmployeeComponent extends Component {
                             }
                             <div className='card-body'>
                                 <form>
-                                    <div className='form-group'>
+                                    <   div className='form-group'>
                                         <label>First Name: </label>
                                         <input placeholder='First Name' name='firstName' className='form-control'
                                             value={this.state.firstName} onChange={this.changeFirstNameHandler} />
@@ -120,22 +127,19 @@ class CreateEmployeeComponent extends Component {
                                             value={this.state.emailId} onChange={this.changeEmailHandler} />
                                     </div>
                                     <div className='form-group'>
-                                        <label>Contact No.: </label>
-                                        <input placeholder='Contact No.' name='contact' className='form-control'
-                                            value={this.state.contact} onChange={this.changeContactHandler} />
+                                        <label>Password: </label>
+                                        <input placeholder='Password' name='password' className='form-control'
+                                            value={this.state.password} onChange={this.changePasswordHandler} />
                                     </div>
                                     <div className='form-group'>
-                                        <label>Location: </label>
-                                        <input placeholder='Location' name='location' className='form-control'
-                                            value={this.state.location} onChange={this.changeLocationHandler} />
+                                        <label>Status: </label>
+                                        <input placeholder='Status' name='status' className='form-control'
+                                            value={this.state.status} onChange={this.changeStatusHandler} />
                                     </div>
                                     <div className='form-group'>
-                                        <label>Job Role: </label>
-                                        <input placeholder='Job Role' name='jobRole' className='form-control' />
-                                    </div>
-                                    <div className='form-group'>
-                                        <label>Department: </label>
-                                        <input placeholder='Department' name='department' className='form-control' />
+                                        <label>Role: </label>
+                                        <input placeholder='Role' name='role' className='form-control'
+                                            value={this.state.role} onChange={this.changeRoleHandler} />
                                     </div>
                                     <button className='btn btn-success' onClick={this.save}>Save</button>
                                     <button className='btn btn-danger' onClick={this.cancel}>Cancel</button>
@@ -149,12 +153,12 @@ class CreateEmployeeComponent extends Component {
     }
 }
 
-// export default CreateEmployeeComponent;
+// export default CreateUserComponent;
 
 function WithNavigate(props) {
     let navigate = useNavigate();
     let match = { params: useParams() };
-    return <CreateEmployeeComponent {...props} navigate={navigate} match={match} />
+    return <CreateUserComponent {...props} navigate={navigate} match={match} />
 }
 
 export default WithNavigate;

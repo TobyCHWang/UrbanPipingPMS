@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import { toHaveFocus } from '@testing-library/jest-dom/dist/matchers';
+import React, { Component, useTransition } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import EmployeeService from '../services/EmployeeService';
+import ClientService from '../services/ClientService';
 
-class CreateEmployeeComponent extends Component {
+class CreateClientComponent extends Component {
     constructor(props) {
         super(props)
 
@@ -12,14 +13,20 @@ class CreateEmployeeComponent extends Component {
             lastName: '',
             emailId: '',
             contact: '',
-            location: ''
+            street: '',
+            city: '',
+            province: '',
+            postalCode: ''
         }
 
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
         this.changeEmailHandler = this.changeEmailHandler.bind(this);
         this.changeContactHandler = this.changeContactHandler.bind(this);
-        this.changeLocationHandler = this.changeLocationHandler.bind(this);
+        this.changeStreetHandler = this.changeStreetHandler.bind(this);
+        this.changeCityHandler = this.changeCityHandler.bind(this);
+        this.changeProvinceHandler = this.changeProvinceHandler.bind(this);
+        this.changePostalCodeHandler = this.changePostalCodeHandler.bind(this);
         this.save = this.save.bind(this);
         this.cancel = this.cancel.bind(this);
     }
@@ -28,14 +35,17 @@ class CreateEmployeeComponent extends Component {
         if (this.state.id === '_add') {
             return;
         } else {
-            EmployeeService.getEmployeeById(this.state.id).then((res) => {
-                let employee = res.data;
+            ClientService.getClientById(this.state.id).then((res) => {
+                let client = res.data;
                 this.setState({
-                    firstName: employee.employeeFirstName,
-                    lastName: employee.employeeLastName,
-                    emailId: employee.employeeEmail,
-                    contact: employee.employeeContact,
-                    location: employee.employeeLocation
+                    firstName: client.clientFirstName,
+                    lastName: client.clientLastName,
+                    emailId: client.clientEmail,
+                    contact: client.clientContact,
+                    street: client.clientStreet,
+                    city: client.clientCity,
+                    province: client.clientProvince,
+                    postalCode: client.clientPostalCode
                 });
             });
         }
@@ -57,39 +67,52 @@ class CreateEmployeeComponent extends Component {
         this.setState({ contact: event.target.value });
     }
 
-    changeLocationHandler = (event) => {
-        this.setState({ location: event.target.value });
+    changeStreetHandler = (event) => {
+        this.setState({ street: event.target.value });
+    }
+
+    changeCityHandler = (event) => {
+        this.setState({ city: event.target.value });
+    }
+
+    changeProvinceHandler = (event) => {
+        this.setState({ province: event.target.value });
+    }
+
+    changePostalCodeHandler = (event) => {
+        this.setState({ postalCode: event.target.value });
     }
 
     save = (e) => {
         e.preventDefault();
 
-        let employee = {
-            employeeFirstName: this.state.firstName, employeeLastName: this.state.lastName, employeeEmail: this.state.emailId,
-            employeeContact: this.state.contact, employeeLocation: this.state.location
+        let client = {
+            clientFirstName: this.state.firstName, clientLastName: this.state.lastName, clientEmail: this.state.emailId,
+            clientContact: this.state.contact, clientStreet: this.state.street, clientCity: this.state.city,
+            clientProvince: this.state.province, clientPostalCode: this.state.postalCode
         };
-        console.log('employee =>' + JSON.stringify(employee));
+        console.log('client =>' + JSON.stringify(client));
 
         if (this.state.id === '_add') {
-            EmployeeService.createEmployee(employee).then(res => {
-                this.props.navigate(`/employees`);
+            ClientService.createClient(client).then(res => {
+                this.props.navigate(`/clients`);
             });
         } else {
-            EmployeeService.updateEmployee(employee, this.state.id).then(res => {
-                this.props.navigate(`/employees`);
+            ClientService.updateClient(client, this.state.id).then(res => {
+                this.props.navigate(`/clients`);
             });
         }
     }
 
     cancel() {
-        this.props.navigate(`/employees`);
+        this.props.navigate(`/clients`);
     }
 
     getTitle() {
         if (this.state.id === '_add') {
-            return <h3 className='text-center'>Add Employee</h3>
+            return <h3 className='text-center'>Add Client</h3>
         } else {
-            return <h3 className='text-center'>Update Employee</h3>
+            return <h3 className='text-center'>Update Client</h3>
         }
     }
 
@@ -125,17 +148,24 @@ class CreateEmployeeComponent extends Component {
                                             value={this.state.contact} onChange={this.changeContactHandler} />
                                     </div>
                                     <div className='form-group'>
-                                        <label>Location: </label>
-                                        <input placeholder='Location' name='location' className='form-control'
-                                            value={this.state.location} onChange={this.changeLocationHandler} />
+                                        <label>Street Address: </label>
+                                        <input placeholder='Street Address' name='street' className='form-control'
+                                            value={this.state.street} onChange={this.changeStreetHandler} />
                                     </div>
                                     <div className='form-group'>
-                                        <label>Job Role: </label>
-                                        <input placeholder='Job Role' name='jobRole' className='form-control' />
+                                        <label>City: </label>
+                                        <input placeholder='City' name='city' className='form-control'
+                                            value={this.state.city} onChange={this.changeCityHandler} />
                                     </div>
                                     <div className='form-group'>
-                                        <label>Department: </label>
-                                        <input placeholder='Department' name='department' className='form-control' />
+                                        <label>Province: </label>
+                                        <input placeholder='Province' name='province' className='form-control'
+                                            value={this.state.province} onChange={this.changeProvinceHandler} />
+                                    </div>
+                                    <div className='form-group'>
+                                        <label>Postal Code: </label>
+                                        <input placeholder='Postal Code' name='postalCode' className='form-control'
+                                            value={this.state.postalCode} onChange={this.changePostalCodeHandler} />
                                     </div>
                                     <button className='btn btn-success' onClick={this.save}>Save</button>
                                     <button className='btn btn-danger' onClick={this.cancel}>Cancel</button>
@@ -149,12 +179,12 @@ class CreateEmployeeComponent extends Component {
     }
 }
 
-// export default CreateEmployeeComponent;
+// export default CreateClientComponent;
 
 function WithNavigate(props) {
     let navigate = useNavigate();
     let match = { params: useParams() };
-    return <CreateEmployeeComponent {...props} navigate={navigate} match={match} />
+    return <CreateClientComponent {...props} navigate={navigate} match={match} />
 }
 
 export default WithNavigate;
