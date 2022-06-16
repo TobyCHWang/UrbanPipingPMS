@@ -8,7 +8,8 @@ class HomePageComponent extends Component {
                 <h1>Home Page</h1>
                 <nav>
                     <Link to='/projects'>Project</Link><br />
-                    {/* <Link>Calendar</Link><br /> */}
+                    <Link to='/tasks'>Task</Link><br />
+                    <Link to='/calendar'>Calendar</Link><br />
                     <Link to='/employees'>Staff</Link><br />
                     <Link to='/clients'>Client</Link><br />
                     <Link to='/users'>User</Link><br />
