@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TaskService from '../services/TaskService';
+import TaskService from '../../services/TaskService';
 
 class ListTaskComponent extends Component {
     constructor(props) {

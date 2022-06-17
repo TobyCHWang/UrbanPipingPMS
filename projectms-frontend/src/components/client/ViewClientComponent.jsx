@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import ClientService from '../services/ClientService';
+import ClientService from '../../services/ClientService';
 
 class ViewClientComponent extends Component {
     constructor(props) {

@@ -1,7 +1,7 @@
 import { toHaveFocus } from '@testing-library/jest-dom/dist/matchers';
 import React, { Component, useTransition } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import ClientService from '../services/ClientService';
+import ClientService from '../../services/ClientService';
 
 class CreateClientComponent extends Component {
     constructor(props) {

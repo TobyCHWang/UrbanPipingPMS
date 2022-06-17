@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import EmployeeService from '../services/EmployeeService';
+import EmployeeService from '../../services/EmployeeService';
 
 class ViewEmployeeComponent extends Component {
     constructor(props) {

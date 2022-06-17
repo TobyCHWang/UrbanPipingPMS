@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserService from '../services/UserService';
+import UserService from '../../services/UserService';
 
 class ListUsersComponent extends Component {
     constructor(props) {

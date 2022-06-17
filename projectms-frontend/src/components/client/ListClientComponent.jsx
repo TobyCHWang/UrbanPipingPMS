@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ClientService from '../services/ClientService';
+import ClientService from '../../services/ClientService';
 
 class ListClientComponent extends Component {
     constructor(props) {
