@@ -8,45 +8,43 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="projects")
+@Table(name = "projects")
 public class Project {
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="projectId")
+	@Column(name = "projectId")
 	private long projectId;
-	
-	@Column(name="projectName")
+
+	@Column(name = "projectName")
 	private String projectName;
-	
-	@Column(name="projectDesc")
+
+	@Column(name = "projectDesc")
 	private String projectDesc;
-	
-	@Column(name="projectStartDate")
+
+	@Column(name = "projectStartDate")
 	private String projectStartDate;
-	
-	@Column(name="projectDueDate")
+
+	@Column(name = "projectDueDate")
 	private String projectDueDate;
-	
-	@Column(name="projectCity")
+
+	@Column(name = "projectCity")
 	private String projectCity;
-	
-	@Column(name="projectStreet")
+
+	@Column(name = "projectStreet")
 	private String projectStreet;
-	
-	@Column(name="projectProv")
+
+	@Column(name = "projectProv")
 	private String projectProv;
-	
-	@Column(name="projectPostalCode")
+
+	@Column(name = "projectPostalCode")
 	private String projectPostalCode;
-	
+
 //	private Client clientId;
 //	private Status statusId;
 
-
 	public Project() {
-		
+
 	}
 
 	public Project(String projectName, String projectDesc, String projectStartDate, String projectDueDate,
@@ -133,11 +131,5 @@ public class Project {
 	public void setProjectPostalCode(String projectPostalCode) {
 		this.projectPostalCode = projectPostalCode;
 	}
-
-	
-	
-
-	
-	
 
 }

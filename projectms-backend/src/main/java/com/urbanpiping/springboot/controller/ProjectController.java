@@ -20,63 +20,63 @@ import com.urbanpiping.springboot.exception.ResourceNotFoundException;
 import com.urbanpiping.springboot.model.Project;
 import com.urbanpiping.springboot.repository.ProjectRepository;
 
-@CrossOrigin (origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/")
 public class ProjectController {
-	
+
 	@Autowired
 	private ProjectRepository projectRepository;
-	
+
 	// get all project
 	@GetMapping("/projects")
-	public List<Project> getAllProject(){
+	public List<Project> getAllProject() {
 		return projectRepository.findAll();
 	}
-	
+
 	// create project rest api
-		@PostMapping("/projects")
-		public Project createProject(@RequestBody Project project) {
-			return projectRepository.save(project);
-		}
-		
-		// get project by id restapi
-		@GetMapping("/projects/{id}")
-		public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
-			Project project = projectRepository.findById(id)
-					.orElseThrow(() -> new ResourceNotFoundException("Project not exist withid: " + id));
-			return ResponseEntity.ok(project);
-		}
-		
-		// update project rest api
-		@PutMapping("/projects/{id}")
-		public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project projectDetails) {
-			
-			Project project = projectRepository.findById(id)
-					.orElseThrow(() -> new ResourceNotFoundException("Project not exist with id: " + id));
-			
-			project.setProjectName(projectDetails.getProjectName());
-			project.setProjectDesc(projectDetails.getProjectDesc());
-			project.setProjectStartDate(projectDetails.getProjectStartDate());
-			project.setProjectDueDate(projectDetails.getProjectDueDate());
-			project.setProjectCity(projectDetails.getProjectCity());
-			project.setProjectStreet(projectDetails.getProjectStreet());
-			project.setProjectProv(projectDetails.getProjectProv());
-			project.setProjectPostalCode(projectDetails.getProjectPostalCode());
-			
-			Project updatedProject = projectRepository.save(project);
-			return ResponseEntity.ok(updatedProject);
-		}
-		
-		// delete project rest api
-		@DeleteMapping("/projects/{id}")
-		public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id) {
-			Project project = projectRepository.findById(id)
-					.orElseThrow(() -> new ResourceNotFoundException("Project not exist with id: " + id));
-			projectRepository.delete(project);
-			Map<String, Boolean> response = new HashMap<>();
-			response.put("deleted", Boolean.TRUE);
-			return ResponseEntity.ok(response);	
-		}
+	@PostMapping("/projects")
+	public Project createProject(@RequestBody Project project) {
+		return projectRepository.save(project);
+	}
+
+	// get project by id restapi
+	@GetMapping("/projects/{id}")
+	public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
+		Project project = projectRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Project not exist withid: " + id));
+		return ResponseEntity.ok(project);
+	}
+
+	// update project rest api
+	@PutMapping("/projects/{id}")
+	public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project projectDetails) {
+
+		Project project = projectRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Project not exist with id: " + id));
+
+		project.setProjectName(projectDetails.getProjectName());
+		project.setProjectDesc(projectDetails.getProjectDesc());
+		project.setProjectStartDate(projectDetails.getProjectStartDate());
+		project.setProjectDueDate(projectDetails.getProjectDueDate());
+		project.setProjectCity(projectDetails.getProjectCity());
+		project.setProjectStreet(projectDetails.getProjectStreet());
+		project.setProjectProv(projectDetails.getProjectProv());
+		project.setProjectPostalCode(projectDetails.getProjectPostalCode());
+
+		Project updatedProject = projectRepository.save(project);
+		return ResponseEntity.ok(updatedProject);
+	}
+
+	// delete project rest api
+	@DeleteMapping("/projects/{id}")
+	public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id) {
+		Project project = projectRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Project not exist with id: " + id));
+		projectRepository.delete(project);
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("deleted", Boolean.TRUE);
+		return ResponseEntity.ok(response);
+	}
 
 }

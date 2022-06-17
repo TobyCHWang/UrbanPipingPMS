@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import TaskService from '../services/TaskService';
+import TaskService from '../../services/TaskService';
 
 
 class ViewTaskComponent extends Component {

@@ -8,24 +8,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tasks")
+@Table(name = "tasks")
 public class Task {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="taskId")
+	@Column(name = "taskId")
 	private long taskId;
-	
-	@Column(name="taskName")
+
+	@Column(name = "taskName")
 	private String taskName;
-	
-	@Column(name="taskDesc")
+
+	@Column(name = "taskDesc")
 	private String taskDesc;
-	
-	@Column(name="taskStartDate")
+
+	@Column(name = "taskStartDate")
 	private String taskStartDate;
-	
-	@Column(name="taskDueDate")
+
+	@Column(name = "taskDueDate")
 	private String taskDueDate;
 //	private employee employeeId;
 //	private Status statusId;
@@ -34,7 +34,7 @@ public class Task {
 //	private Priority priorityId;
 
 	public Task() {
-		
+
 	}
 
 	public Task(String taskName, String taskDesc, String taskStartDate, String taskDueDate) {
@@ -84,9 +84,5 @@ public class Task {
 	public void setTaskDueDate(String taskDueDate) {
 		this.taskDueDate = taskDueDate;
 	}
-	
-
-	
-	
 
 }

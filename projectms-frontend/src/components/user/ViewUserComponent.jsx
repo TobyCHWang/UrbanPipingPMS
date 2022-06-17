@@ -1,55 +1,51 @@
 import React, { Component } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import EmployeeService from '../services/EmployeeService';
+import UserService from '../../services/UserService';
 
-class ViewEmployeeComponent extends Component {
+class ViewUserComponent extends Component {
     constructor(props) {
         super(props)
-        
+
         this.state = {
-         id: this.props.match.params.id,
-         employee:{}
+            id: this.props.match.params.id,
+            user: {}
         }
     }
 
     componentDidMount() {
-        EmployeeService.getEmployeeById(this.state.id).then(res => {
-            this.setState({employee:res.data});
-        });
+        UserService.getUserById(this.state.id).then(res => {
+            this.setState({ user: res.data });
+        })
     }
 
     render() {
         return (
             <div>
                 <div className='card col-md-6 offset-md-3'>
-                    <h3 className='text-center'>View Employee Details</h3>
+                    <h3 className='text-center'>View User Details</h3>
                     <div className='card-body'>
                         <div className='row'>
                             <label>First Name: </label>
-                            <div>{this.state.employee.employeeFirstName}</div>
+                            <div>{this.state.user.userFirstName}</div>
                         </div>
                         <div className='row'>
                             <label>Last Name: </label>
-                            <div>{this.state.employee.employeeLastName}</div>
+                            <div>{this.state.user.userLastName}</div>
                         </div>
                         <div className='row'>
                             <label>Email Id: </label>
-                            <div>{this.state.employee.employeeEmail}</div>
+                            <div>{this.state.user.userEmail}</div>
                         </div>
                         <div className='row'>
-                            <label>Contact: </label>
-                            <div>{this.state.employee.employeeContact}</div>
+                            <label>Password: </label>
+                            <div>{this.state.user.userPassword}</div>
                         </div>
                         <div className='row'>
-                            <label>Location:</label>
-                            <div>{this.state.employee.employeeLocation}</div>
+                            <label>Status: </label>
+                            <div>{this.state.user.userStatus}</div>
                         </div>
                         <div className='row'>
-                            <label>Job Role:</label>
-                            <div></div>
-                        </div>
-                        <div className='row'>
-                            <label>Department:</label>
+                            <label>Role: </label>
                             <div></div>
                         </div>
                     </div>
@@ -59,12 +55,12 @@ class ViewEmployeeComponent extends Component {
     }
 }
 
-// export default ViewEmployeeComponent;
+// export default ViewUserComponent;
 
 function WithNavigate(props) {
     let navigate = useNavigate();
     let match = { params: useParams() };
-    return <ViewEmployeeComponent {...props} navigate={navigate} match={match} />
+    return <ViewUserComponent {...props} navigate={navigate} match={match} />
 }
 
 export default WithNavigate;

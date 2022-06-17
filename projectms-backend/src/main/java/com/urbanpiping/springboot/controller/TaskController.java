@@ -20,7 +20,6 @@ import com.urbanpiping.springboot.exception.ResourceNotFoundException;
 import com.urbanpiping.springboot.model.Task;
 import com.urbanpiping.springboot.repository.TaskRepository;
 
-
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/")
@@ -28,19 +27,19 @@ public class TaskController {
 
 	@Autowired
 	private TaskRepository taskRepository;
-	
+
 	// get all employees
 	@GetMapping("/tasks")
 	public List<Task> getAllEmployees() {
 		return taskRepository.findAll();
 	}
-	
+
 	// create employee rest api
 	@PostMapping("/tasks")
 	public Task createEmployee(@RequestBody Task task) {
 		return taskRepository.save(task);
 	}
-	
+
 	// get employee by id restapi
 	@GetMapping("/tasks/{id}")
 	public ResponseEntity<Task> getEmployeeById(@PathVariable Long id) {
@@ -48,23 +47,23 @@ public class TaskController {
 				.orElseThrow(() -> new ResourceNotFoundException("Task not exist withid: " + id));
 		return ResponseEntity.ok(task);
 	}
-	
+
 	// update employee rest api
 	@PutMapping("/tasks/{id}")
 	public ResponseEntity<Task> updateEmployee(@PathVariable Long id, @RequestBody Task taskDetails) {
-		
+
 		Task task = taskRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Task not exist with id: " + id));
-		
+
 		task.setTaskName(taskDetails.getTaskName());
 		task.setTaskDesc(taskDetails.getTaskDesc());
 		task.setTaskStartDate(taskDetails.getTaskStartDate());
 		task.setTaskDueDate(taskDetails.getTaskDueDate());
-		
+
 		Task updatedTask = taskRepository.save(task);
 		return ResponseEntity.ok(updatedTask);
 	}
-	
+
 	// delete employee rest api
 	@DeleteMapping("/tasks/{id}")
 	public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id) {
@@ -73,7 +72,7 @@ public class TaskController {
 		taskRepository.delete(task);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
-		return ResponseEntity.ok(response);	
+		return ResponseEntity.ok(response);
 	}
-	
+
 }
