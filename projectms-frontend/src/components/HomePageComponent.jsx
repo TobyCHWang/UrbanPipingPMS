@@ -7,18 +7,13 @@ class HomePageComponent extends Component {
             <div>
                 <h1>Home Page</h1>
                 <nav>
-                    <Link to='/'>Home</Link>
-                    <br/>
-                     <Link to='/projects'>Project</Link>
-                     <br/>
-                     <Link to='/tasks'>Task</Link>
-                     <br/>
-                    <Link to='/calendar'>Calendar</Link> 
-                    <br/>
-                    <Link to='/employees'>Staff</Link>
-                    {/* <Link>Client</Link>
-                    <Link>User</Link>
-                    <Link>Messaging</Link> */}
+                    <Link to='/projects'>Project</Link><br />
+                    <Link to='/tasks'>Task</Link><br />
+                    <Link to='/calendar'>Calendar</Link><br />
+                    <Link to='/employees'>Staff</Link><br />
+                    <Link to='/clients'>Client</Link><br />
+                    <Link to='/users'>User</Link><br />
+                    {/* <Link>Messaging</Link><br /> */}
                 </nav>
             </div>
         );

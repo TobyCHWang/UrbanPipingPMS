@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
-import EmployeeService from '../services/EmployeeService';
+import EmployeeService from '../../services/EmployeeService';
 
 class ListEmployeeComponent extends Component {
     constructor(props) {
         super(props)
-        
+
         this.state = {
-            employees:[]
+            employees: []
         }
 
         this.addEmployee = this.addEmployee.bind(this);
@@ -18,8 +18,8 @@ class ListEmployeeComponent extends Component {
 
     componentDidMount() {
         EmployeeService.getEmployees().then((res) => {
-            this.setState({employees:res.data});
-        })
+            this.setState({ employees: res.data });
+        });
     }
 
     addEmployee() {
@@ -32,7 +32,7 @@ class ListEmployeeComponent extends Component {
 
     deleteEmployee(id) {
         EmployeeService.deleteEmployee(id).then(res => {
-            this.setState({employees:this.state.employees.filter(employee => employee.employeeId !== id)});
+            this.setState({ employees: this.state.employees.filter(employee => employee.employeeId !== id) });
         });
     }
 
@@ -57,41 +57,40 @@ class ListEmployeeComponent extends Component {
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Contact No.</th>
+                                <th>Location</th>
                                 <th>Job Role</th>
                                 <th>Department</th>
-                                <th>Location</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                this.state.employees.map (
+                                this.state.employees.map(
                                     employee =>
-                                    <tr key = {employee.employeeId}>
-                                        <td>{employee.employeeFirstName}</td>
-                                        <td>{employee.employeeLastName}</td>
-                                        <td>{employee.employeeEmail}</td>
-                                        <td>{employee.employeeContact}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <button className='btn btn-info' onClick={() => this.editEmployee(employee.employeeId)}>
-                                                Update
-                                            </button>
-                                            <button className='btn btn-danger' onClick={() => this.deleteEmployee(employee.employeeId)}>
-                                                Delete
-                                            </button>
-                                            <button className='btn btn-info' onClick={() => this.viewEmployee(employee.employeeId)}>
-                                                View
-                                            </button>
-                                        </td>
-                                    </tr>
+                                        <tr key={employee.employeeId}>
+                                            <td>{employee.employeeFirstName}</td>
+                                            <td>{employee.employeeLastName}</td>
+                                            <td>{employee.employeeEmail}</td>
+                                            <td>{employee.employeeContact}</td>
+                                            <td>{employee.employeeLocation}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <button className='btn btn-info' onClick={() => this.editEmployee(employee.employeeId)}>
+                                                    Update
+                                                </button>
+                                                <button className='btn btn-danger' onClick={() => this.deleteEmployee(employee.employeeId)}>
+                                                    Delete
+                                                </button>
+                                                <button className='btn btn-info' onClick={() => this.viewEmployee(employee.employeeId)}>
+                                                    View
+                                                </button>
+                                            </td>
+                                        </tr>
                                 )
                             }
                         </tbody>
                     </table>
-
                 </div>
             </div>
         );
