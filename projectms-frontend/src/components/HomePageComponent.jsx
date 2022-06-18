@@ -13,7 +13,7 @@ class HomePageComponent extends Component {
                     <Link to='/employees'>Staff</Link><br />
                     <Link to='/clients'>Client</Link><br />
                     <Link to='/users'>User</Link><br />
-                    {/* <Link>Messaging</Link><br /> */}
+                    <Link to='/chatroom'>Messaging</Link><br />
                 </nav>
             </div>
         );
