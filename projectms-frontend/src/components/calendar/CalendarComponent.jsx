@@ -69,7 +69,11 @@ function CalendarComponent() {
                 localizer={localizer}
                 events={allEvents}
                 startAccessor="start"
-                endAccessor="end"
+                endAccessor={(event) => { 
+                    let day=event.end.getDate()+1;
+                    return new Date(event.end.getFullYear(),event.end.getMonth(),day);
+                
+                }}
                 style={{ height: 500, margin: "50px" }} />
         </div>
     )
