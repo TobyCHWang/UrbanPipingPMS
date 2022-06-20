@@ -20,6 +20,8 @@ import ViewProjectComponent from './components/project/ViewProjectComponent';
 import CreateProjectComponent from './components/project/CreateProjectComponent';
 import CalendarComponent from './components/calendar/CalendarComponent';
 
+import ChatRoom from './components/message/ChatRoom';
+
 function App() {
   return (
     <div>
@@ -50,6 +52,7 @@ function App() {
             <Route path='/view-task/:id' element={<ViewTaskComponent />} />
             {/* Calendar */}
             <Route path='/calendar' element={<CalendarComponent />} />
+            <Route path='/chatroom' element={<ChatRoom/>}/>
           </Routes>
         </div>
       </Router>
