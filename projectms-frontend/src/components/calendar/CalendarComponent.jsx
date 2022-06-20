@@ -1,4 +1,4 @@
-import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import { Calendar, dateFnsLocalizer, DateLocalizer } from "react-big-calendar";
 import format from "date-fns/format";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
@@ -22,19 +22,19 @@ const localizer = dateFnsLocalizer({
 
 const events = [
     {
-        title: "Big meeting",
+        title: "Big Meeting",
         allDay: true,
         start: new Date(2022, 6, 0),
         end: new Date(2022, 6, 0)
     },
     {
-        title: "vacation",
+        title: "Vacation",
         allDay: true,
         start: new Date(2022, 6, 0),
         end: new Date(2022, 6, 0)
     },
     {
-        title: "conderence",
+        title: "Conference",
         allDay: true,
         start: new Date(2022, 6, 7),
         end: new Date(2022, 6, 10)
@@ -69,7 +69,11 @@ function CalendarComponent() {
                 localizer={localizer}
                 events={allEvents}
                 startAccessor="start"
-                endAccessor="end"
+                // endAccessor="end"
+                endAccessor={(e) => {
+                    let day = e.end.getDate() + 1;
+                    return new Date(e.end.getFullYear(), e.end.getMonth(), day);
+                }}
                 style={{ height: 500, margin: "50px" }} />
         </div>
     )
