@@ -109,12 +109,12 @@ class CreateTaskComponent extends Component {
                                 </div>
                                 <div className='form-group'>
                                     <label>Task Start Date: </label>
-                                    <input placeholder='taskStartDate' name='taskStartDate' className='form-control'
+                                    <input placeholder='taskStartDate' input type='Date' name='taskStartDate' className='form-control'
                                         value={this.state.taskStartDate} onChange={this.changeTaskStartDateHandler} />
                                 </div>
                                 <div className='form-group'>
                                     <label>Task Due Date: </label>
-                                    <input placeholder='taskDueDate' name='taskDueDate' className='form-control'
+                                    <input placeholder='taskDueDate' input type='Date' name='taskDueDate' className='form-control'
                                         value={this.state.taskDueDate} onChange={this.changeTaskDueDateHandler} />
                                 </div>
                                 
