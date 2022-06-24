@@ -128,7 +128,7 @@ class CreateUserComponent extends Component {
                                     </div>
                                     <div className='form-group'>
                                         <label>Password: </label>
-                                        <input placeholder='Password' name='password' className='form-control'
+                                        <input placeholder='Password' input type='password' name='password' className='form-control'
                                             value={this.state.password} onChange={this.changePasswordHandler} />
                                     </div>
                                     <div className='form-group'>

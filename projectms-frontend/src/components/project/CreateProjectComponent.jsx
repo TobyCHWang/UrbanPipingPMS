@@ -132,12 +132,12 @@ class CreateProjectComponent extends Component {
                                 </div>
                                 <div className='form-group'>
                                     <label>Project Start Date: </label>
-                                    <input placeholder='Project Start Date' name='projectStartDate' className='form-control'
+                                    <input placeholder='Project Start Date' input type='Date' name='projectStartDate' className='form-control'
                                         value={this.state.projectStartDate} onChange={this.changeProjectStartDateHandler} />
                                 </div>
                                 <div className='form-group'>
                                     <label>Project Due Date: </label>
-                                    <input placeholder='Project Due Date' name='projectDueDate' className='form-control'
+                                    <input placeholder='Project Due Date' input type='Date' name='projectDueDate' className='form-control'
                                         value={this.state.projectDueDate} onChange={this.changeProjectDueDateHandler} />
                                 </div>
                                 <div className='form-group'>
@@ -151,7 +151,7 @@ class CreateProjectComponent extends Component {
                                         value={this.state.projectStreet} onChange={this.changeProjectStreetHandler} />
                                 </div>
                                 <div className='form-group'>
-                                    <label>project Province: </label>
+                                    <label>Project Province: </label>
                                     <input placeholder='project Province' name='projectProv' className='form-control'
                                         value={this.state.projectProv} onChange={this.changeProjectProvHandler} />
                                 </div>
