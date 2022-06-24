@@ -22,6 +22,8 @@ import CalendarComponent from './components/calendar/CalendarComponent';
 
 import ChatRoom from './components/message/ChatRoom';
 
+import GanttExport from './components/gantt/GanttExport';
+
 function App() {
   return (
     <div>
@@ -53,6 +55,9 @@ function App() {
             {/* Calendar */}
             <Route path='/calendar' element={<CalendarComponent />} />
             <Route path='/chatroom' element={<ChatRoom/>}/>
+
+            {/* Gantt */}
+            <Route path='/gantt' element={<GanttExport/>}/>
           </Routes>
         </div>
       </Router>
