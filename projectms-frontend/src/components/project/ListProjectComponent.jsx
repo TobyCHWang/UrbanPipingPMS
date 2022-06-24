@@ -54,14 +54,14 @@ class ListProjectComponent extends Component {
                     <table className='table table-striped table-bordered'>
                         <thead>
                             <tr>
-                                <th>Project Name</th>
-                                <th>Project Description</th>
-                                <th>Project Start Date</th>
-                                <th>Project Due Date</th>
-                                <th>Project city</th>
-                                <th>Project street</th>
-                                <th>Project province</th>
-                                <th>Project postal code</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Start Date</th>
+                                <th>Due Date</th>
+                                <th>City</th>
+                                <th>Street</th>
+                                <th>Province</th>
+                                <th>Postal Code</th>
                                 <th>Client</th>
                                 <th>Status</th>
                             </tr>
