@@ -1,5 +1,6 @@
 import './Login.css';
-import LogoTransparent from './LogoTransparent.png'
+import LogoTransparent from '/LogoTransparent.png'
+
 
 
 
