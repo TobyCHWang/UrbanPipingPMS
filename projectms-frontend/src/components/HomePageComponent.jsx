@@ -14,7 +14,8 @@ class HomePageComponent extends Component {
                     <Link to='/clients'>Client</Link><br />
                     <Link to='/users'>User</Link><br />
                     <Link to='/gantt'>Gantt</Link><br />
-                    <Link to='/chatroom'>Chat room</Link><br />
+                    <Link to='/chatroom'>Chat Room</Link><br />
+                    <Link to='/tickets'>Tickets</Link><br />
                 </nav>
             </div>
         );
