@@ -22,10 +22,10 @@ import ViewProjectComponent from './components/project/ViewProjectComponent';
 import CreateProjectComponent from './components/project/CreateProjectComponent';
 import CalendarComponent from './components/calendar/CalendarComponent';
 
-
 import ChatRoom from './components/message/ChatRoom';
-
 import GanttExport from './components/gantt/GanttExport';
+import ListTickets from './components/tickets/ListTickets';
+import ViewTicket from './components/tickets/ViewTicket';
 
 function App() {
   return (
@@ -57,10 +57,13 @@ function App() {
             <Route path='/view-task/:id' element={<ViewTaskComponent />} />
             {/* Calendar */}
             <Route path='/calendar' element={<CalendarComponent />} />
-            <Route path='/chatroom' element={<ChatRoom/>}/>
-
+            {/* Chat Room */}
+            <Route path='/chatroom' element={<ChatRoom />} />
             {/* Gantt */}
-            <Route path='/gantt' element={<GanttExport/>}/>
+            <Route path='/gantt' element={<GanttExport />} />
+            {/* Tickets */}
+            <Route path='/tickets' element={<ListTickets />} />
+            <Route path='/view-ticket' element={<ViewTicket />} />
           </Routes>
         </div>
       </Router>
