@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import './HomePageComponent.css';
+
+
 class HomePageComponent extends Component {
     render() {
         return (
@@ -19,6 +22,7 @@ class HomePageComponent extends Component {
             </div>
         );
     }
+
 }
 
 export default HomePageComponent;
