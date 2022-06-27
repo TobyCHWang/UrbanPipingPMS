@@ -53,15 +53,16 @@ class ListTaskComponent extends Component {
                     <table className='table table-striped table-bordered'>
                         <thead>
                             <tr>
-                                <th>Task Name</th>
-                                <th>Task Description</th>
-                                <th>Task Start Date</th>
-                                <th>Task Due Date</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Start Date</th>
+                                <th>Due Date</th>
                                 <th>Status</th>
                                 <th>Task Type</th>
                                 <th>Employee</th>
                                 <th>Priority</th>
                                 <th>Photo</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,6 +74,7 @@ class ListTaskComponent extends Component {
                                         <td>{task.taskDesc}</td>
                                         <td>{task.taskStartDate}</td>
                                         <td>{task.taskDueDate}</td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>

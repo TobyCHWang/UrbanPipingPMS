@@ -56,9 +56,10 @@ class ListUsersComponent extends Component {
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
-                                <th>Password</th>
+                                {/* <th>Password</th> */}
                                 <th>Status</th>
                                 <th>Role</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,7 +70,7 @@ class ListUsersComponent extends Component {
                                             <td>{user.userFirstName}</td>
                                             <td>{user.userLastName}</td>
                                             <td>{user.userEmail}</td>
-                                            <td>{user.userPassword}</td>
+                                            {/* <td>{user.userPassword}</td> */}
                                             <td>{user.userStatus}</td>
                                             <td>{user.userRole}</td>
                                             <td>

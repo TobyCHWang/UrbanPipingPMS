@@ -1,0 +1,79 @@
+[
+    {
+        "id": 1,
+        "subject": "Issue with ssl certificate",
+        "status": "Client response pending",
+        "addedAt": "2022-06-01",
+        "history": [
+            {
+                "date": "2022-06-10",
+                "message": "client message 1",
+                "messageBy": "client"
+            },
+            {
+                "date": "2022-06-10",
+                "message": "operator message",
+                "messageBy": "operator"
+            },
+            {
+                "date": "2022-06-10",
+                "message": "client message 2",
+                "messageBy": "client"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "subject": "Issue with ssl certificate",
+        "status": "Client response pending",
+        "addedAt": "2022-06-01"
+    },
+    {
+        "id": 3,
+        "subject": "Email certificate expired",
+        "status": "Client response pending",
+        "addedAt": "2022-06-01"
+    },
+    {
+        "id": 4,
+        "subject": "Issue with email certificate",
+        "status": "Client response pending",
+        "addedAt": "2022-06-01"
+    },
+    {
+        "id": 5,
+        "subject": "Issue app crashing",
+        "status": "Client response pending",
+        "addedAt": "2022-06-01"
+    },
+    {
+        "id": 6,
+        "subject": "Issue with ssl certificate",
+        "status": "Client response pending",
+        "addedAt": "2022-06-01"
+    },
+    {
+        "id": 7,
+        "subject": "Issue with ssl certificate",
+        "status": "Client response pending",
+        "addedAt": "2022-06-01"
+    },
+    {
+        "id": 8,
+        "subject": "Issue with ssl certificate",
+        "status": "Client response pending",
+        "addedAt": "2022-06-01"
+    },
+    {
+        "id": 9,
+        "subject": "Issue with ssl certificate",
+        "status": "Client response pending",
+        "addedAt": "2022-06-01"
+    },
+    {
+        "id": 10,
+        "subject": "Issue with ssl certificate",
+        "status": "Client response pending",
+        "addedAt": "2022-06-01"
+    }
+]
