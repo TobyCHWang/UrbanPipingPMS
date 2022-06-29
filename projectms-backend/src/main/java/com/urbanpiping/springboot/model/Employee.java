@@ -26,21 +26,26 @@ public class Employee {
 	@Column(name = "empLocation")
 	private String employeeLocation;
 
-//	private JobRole jobRole;
-//	private Department deptName;
+	@Column(name = "empRole")
+	private String employeeRole;
+
+	@Column(name = "empDept")
+	private String employeeDept;
 
 	public Employee() {
 
 	}
 
 	public Employee(String employeeFirstName, String employeeLastName, String employeeEmail, String employeeContact,
-			String employeeLocation) {
+			String employeeLocation, String employeeRole, String employeeDept) {
 		super();
 		this.employeeFirstName = employeeFirstName;
 		this.employeeLastName = employeeLastName;
 		this.employeeEmail = employeeEmail;
 		this.employeeContact = employeeContact;
 		this.employeeLocation = employeeLocation;
+		this.employeeRole = employeeRole;
+		this.employeeDept = employeeDept;
 	}
 
 	public long getEmployeeId() {
@@ -90,5 +95,21 @@ public class Employee {
 	public void setEmployeeLocation(String employeeLocation) {
 		this.employeeLocation = employeeLocation;
 	}
-	
+
+	public String getEmployeeRole() {
+		return employeeRole;
+	}
+
+	public void setEmployeeRole(String employeeRole) {
+		this.employeeRole = employeeRole;
+	}
+
+	public String getEmployeeDept() {
+		return employeeDept;
+	}
+
+	public void setEmployeeDept(String employeeDept) {
+		this.employeeDept = employeeDept;
+	}
+
 }

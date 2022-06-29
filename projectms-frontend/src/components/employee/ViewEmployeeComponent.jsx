@@ -45,12 +45,12 @@ class ViewEmployeeComponent extends Component {
               <div>{this.state.employee.employeeLocation}</div>
             </div>
             <div className="row">
-              <label>Job Role:</label>
-              <div></div>
+              <label>Role:</label>
+              <div>{this.state.employee.employeeRole}</div>
             </div>
             <div className="row">
               <label>Department:</label>
-              <div></div>
+              <div>{this.state.employee.employeeDepartment}</div>
             </div>
           </div>
         </div>
