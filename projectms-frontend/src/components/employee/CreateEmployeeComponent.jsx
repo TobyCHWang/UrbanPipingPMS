@@ -13,6 +13,8 @@ class CreateEmployeeComponent extends Component {
       emailId: "",
       contact: "",
       location: "",
+      role: "",
+      department: "",
     };
 
     this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
@@ -20,6 +22,8 @@ class CreateEmployeeComponent extends Component {
     this.changeEmailHandler = this.changeEmailHandler.bind(this);
     this.changeContactHandler = this.changeContactHandler.bind(this);
     this.changeLocationHandler = this.changeLocationHandler.bind(this);
+    this.changeRoleHandler = this.changeRoleHandler.bind(this);
+    this.changeDeparmentHandler = this.changeDeparmentHandler.bind(this);
     this.save = this.save.bind(this);
     this.cancel = this.cancel.bind(this);
   }
@@ -36,6 +40,8 @@ class CreateEmployeeComponent extends Component {
           emailId: employee.employeeEmail,
           contact: employee.employeeContact,
           location: employee.employeeLocation,
+          role: employee.employeeRole,
+          department: employee.employeeDepartment,
         });
       });
     }
@@ -61,6 +67,14 @@ class CreateEmployeeComponent extends Component {
     this.setState({ location: event.target.value });
   };
 
+  changeRoleHandler = (event) => {
+    this.setState({ role: event.target.value });
+  };
+
+  changeDeparmentHandler = (event) => {
+    this.setState({ department: event.target.value });
+  };
+
   save = (e) => {
     e.preventDefault();
 
@@ -70,6 +84,8 @@ class CreateEmployeeComponent extends Component {
       employeeEmail: this.state.emailId,
       employeeContact: this.state.contact,
       employeeLocation: this.state.location,
+      employeeRole: this.state.role,
+      employeeDepartment: this.state.department,
     };
     console.log("employee =>" + JSON.stringify(employee));
 
@@ -156,11 +172,13 @@ class CreateEmployeeComponent extends Component {
                     />
                   </div>
                   <div className="form-group">
-                    <label>Job Role: </label>
+                    <label>Role: </label>
                     <input
                       placeholder="Job Role"
-                      name="jobRole"
+                      name="role"
                       className="form-control"
+                      value={this.state.role}
+                      onChange={this.changeRoleHandler}
                     />
                   </div>
                   <div className="form-group">
@@ -169,6 +187,8 @@ class CreateEmployeeComponent extends Component {
                       placeholder="Department"
                       name="department"
                       className="form-control"
+                      value={this.state.department}
+                      onChange={this.changeDepartmentHandler}
                     />
                   </div>
                   <button className="btn btn-success" onClick={this.save}>

@@ -1,5 +1,7 @@
 package com.urbanpiping.springboot.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,10 +25,10 @@ public class Project {
 	private String projectDesc;
 
 	@Column(name = "projectStartDate")
-	private String projectStartDate;
+	private Date projectStartDate;
 
 	@Column(name = "projectDueDate")
-	private String projectDueDate;
+	private Date projectDueDate;
 
 	@Column(name = "projectCity")
 	private String projectCity;
@@ -40,15 +42,18 @@ public class Project {
 	@Column(name = "projectPostalCode")
 	private String projectPostalCode;
 
-//	private Client clientId;
-//	private Status statusId;
+	@Column(name = "projectStatus")
+	private String projectStatus;
+
+//	private int clientId;
 
 	public Project() {
 
 	}
 
-	public Project(String projectName, String projectDesc, String projectStartDate, String projectDueDate,
-			String projectCity, String projectStreet, String projectProv, String projectPostalCode) {
+	public Project(String projectName, String projectDesc, Date projectStartDate, Date projectDueDate,
+			String projectCity, String projectStreet, String projectProv, String projectPostalCode,
+			String projectStatus) {
 		super();
 		this.projectName = projectName;
 		this.projectDesc = projectDesc;
@@ -58,6 +63,7 @@ public class Project {
 		this.projectStreet = projectStreet;
 		this.projectProv = projectProv;
 		this.projectPostalCode = projectPostalCode;
+		this.projectStatus = projectStatus;
 	}
 
 	public long getProjectId() {
@@ -84,19 +90,19 @@ public class Project {
 		this.projectDesc = projectDesc;
 	}
 
-	public String getProjectStartDate() {
+	public Date getProjectStartDate() {
 		return projectStartDate;
 	}
 
-	public void setProjectStartDate(String projectStartDate) {
+	public void setProjectStartDate(Date projectStartDate) {
 		this.projectStartDate = projectStartDate;
 	}
 
-	public String getProjectDueDate() {
+	public Date getProjectDueDate() {
 		return projectDueDate;
 	}
 
-	public void setProjectDueDate(String projectDueDate) {
+	public void setProjectDueDate(Date projectDueDate) {
 		this.projectDueDate = projectDueDate;
 	}
 
@@ -130,6 +136,14 @@ public class Project {
 
 	public void setProjectPostalCode(String projectPostalCode) {
 		this.projectPostalCode = projectPostalCode;
+	}
+
+	public String getProjectStatus() {
+		return projectStatus;
+	}
+
+	public void setProjectStatus(String projectStatus) {
+		this.projectStatus = projectStatus;
 	}
 
 }
