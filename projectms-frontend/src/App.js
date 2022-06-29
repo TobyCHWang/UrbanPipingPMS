@@ -21,11 +21,12 @@ import CreateTaskComponent from './components/task/CreateTaskComponent';
 import ViewProjectComponent from './components/project/ViewProjectComponent';
 import CreateProjectComponent from './components/project/CreateProjectComponent';
 import CalendarComponent from './components/calendar/CalendarComponent';
-
 import ChatRoom from './components/message/ChatRoom';
 import GanttExport from './components/gantt/GanttExport';
 import ListTickets from './components/tickets/ListTickets';
 import ViewTicket from './components/tickets/ViewTicket';
+import LoginComponent from './components/login/LoginComponent';
+import CreateTicket from './components/tickets/CreateTicket';
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
       <Router>
         <div className='container'>
           <Routes>
-            <Route path='/' element={<HomePageComponent />} />
+            <Route path='/homepage' element={<HomePageComponent />} />
             {/* Employee */}
             <Route path='/employees' element={<ListEmployeeComponent />} />
             <Route path='/add-employee/:id' element={<CreateEmployeeComponent />} />
@@ -64,6 +65,9 @@ function App() {
             {/* Tickets */}
             <Route path='/tickets' element={<ListTickets />} />
             <Route path='/view-ticket' element={<ViewTicket />} />
+            <Route path='/add-ticket' element={<CreateTicket />} />
+            {/* Login */}
+            <Route path='/' element={<LoginComponent />} />
           </Routes>
         </div>
       </Router>
