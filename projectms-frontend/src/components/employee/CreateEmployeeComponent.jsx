@@ -23,7 +23,7 @@ class CreateEmployeeComponent extends Component {
     this.changeContactHandler = this.changeContactHandler.bind(this);
     this.changeLocationHandler = this.changeLocationHandler.bind(this);
     this.changeRoleHandler = this.changeRoleHandler.bind(this);
-    this.changeDeparmentHandler = this.changeDeparmentHandler.bind(this);
+    this.changeDepartmentHandler = this.changeDepartmentHandler.bind(this);
     this.save = this.save.bind(this);
     this.cancel = this.cancel.bind(this);
   }
@@ -41,7 +41,7 @@ class CreateEmployeeComponent extends Component {
           contact: employee.employeeContact,
           location: employee.employeeLocation,
           role: employee.employeeRole,
-          department: employee.employeeDepartment,
+          department: employee.employeeDept,
         });
       });
     }
@@ -71,7 +71,7 @@ class CreateEmployeeComponent extends Component {
     this.setState({ role: event.target.value });
   };
 
-  changeDeparmentHandler = (event) => {
+  changeDepartmentHandler = (event) => {
     this.setState({ department: event.target.value });
   };
 
@@ -85,7 +85,7 @@ class CreateEmployeeComponent extends Component {
       employeeContact: this.state.contact,
       employeeLocation: this.state.location,
       employeeRole: this.state.role,
-      employeeDepartment: this.state.department,
+      employeeDept: this.state.department,
     };
     console.log("employee =>" + JSON.stringify(employee));
 
