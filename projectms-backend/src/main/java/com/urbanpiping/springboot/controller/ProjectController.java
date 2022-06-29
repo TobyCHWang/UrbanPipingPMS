@@ -63,6 +63,7 @@ public class ProjectController {
 		project.setProjectStreet(projectDetails.getProjectStreet());
 		project.setProjectProv(projectDetails.getProjectProv());
 		project.setProjectPostalCode(projectDetails.getProjectPostalCode());
+		project.setProjectStatus(projectDetails.getProjectStatus());
 
 		Project updatedProject = projectRepository.save(project);
 		return ResponseEntity.ok(updatedProject);

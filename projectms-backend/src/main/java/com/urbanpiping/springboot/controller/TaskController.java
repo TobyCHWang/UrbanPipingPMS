@@ -59,7 +59,10 @@ public class TaskController {
 		task.setTaskDesc(taskDetails.getTaskDesc());
 		task.setTaskStartDate(taskDetails.getTaskStartDate());
 		task.setTaskDueDate(taskDetails.getTaskDueDate());
-
+		task.setTaskStatus(taskDetails.getTaskStatus());
+		task.setTaskType(taskDetails.getTaskType());
+		task.setTaskPriority(taskDetails.getTaskPriority());
+		
 		Task updatedTask = taskRepository.save(task);
 		return ResponseEntity.ok(updatedTask);
 	}

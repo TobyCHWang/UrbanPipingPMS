@@ -1,5 +1,7 @@
 package com.urbanpiping.springboot.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,26 +25,37 @@ public class Task {
 	private String taskDesc;
 
 	@Column(name = "taskStartDate")
-	private String taskStartDate;
+	private Date taskStartDate;
 
 	@Column(name = "taskDueDate")
-	private String taskDueDate;
-//	private employee employeeId;
-//	private Status statusId;
-//	private TaskType taskTypeId;
-//	private Photo photoId;
-//	private Priority priorityId;
+	private Date taskDueDate;
+
+	@Column(name = "taskStatus")
+	private String taskStatus;
+
+	@Column(name = "taskType")
+	private String taskType;
+
+	@Column(name = "taskPriority")
+	private String taskPriority;
+
+//	private int employeeId;
+//	private int photoId;
 
 	public Task() {
 
 	}
 
-	public Task(String taskName, String taskDesc, String taskStartDate, String taskDueDate) {
+	public Task(String taskName, String taskDesc, Date taskStartDate, Date taskDueDate, String taskStatus,
+			String taskType, String taskPriority) {
 		super();
 		this.taskName = taskName;
 		this.taskDesc = taskDesc;
 		this.taskStartDate = taskStartDate;
 		this.taskDueDate = taskDueDate;
+		this.taskStatus = taskStatus;
+		this.taskType = taskType;
+		this.taskPriority = taskPriority;
 	}
 
 	public long getTaskId() {
@@ -69,20 +82,44 @@ public class Task {
 		this.taskDesc = taskDesc;
 	}
 
-	public String getTaskStartDate() {
+	public Date getTaskStartDate() {
 		return taskStartDate;
 	}
 
-	public void setTaskStartDate(String taskStartDate) {
+	public void setTaskStartDate(Date taskStartDate) {
 		this.taskStartDate = taskStartDate;
 	}
 
-	public String getTaskDueDate() {
+	public Date getTaskDueDate() {
 		return taskDueDate;
 	}
 
-	public void setTaskDueDate(String taskDueDate) {
+	public void setTaskDueDate(Date taskDueDate) {
 		this.taskDueDate = taskDueDate;
+	}
+
+	public String getTaskStatus() {
+		return taskStatus;
+	}
+
+	public void setTaskStatus(String taskStatus) {
+		this.taskStatus = taskStatus;
+	}
+
+	public String getTaskType() {
+		return taskType;
+	}
+
+	public void setTaskType(String taskType) {
+		this.taskType = taskType;
+	}
+
+	public String getTaskPriority() {
+		return taskPriority;
+	}
+
+	public void setTaskPriority(String taskPriority) {
+		this.taskPriority = taskPriority;
 	}
 
 }

@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -32,19 +31,22 @@ public class User {
 	@Column(name = "userStatus")
 	private String userStatus;
 
-//	private UserRole userRole;
+	@Column(name = "userRole")
+	private String userRole;
 
 	public User() {
 
 	}
 
-	public User(String userFirstName, String userLastName, String userEmail, String userPassword, String userStatus) {
+	public User(String userFirstName, String userLastName, String userEmail, String userPassword, String userStatus,
+			String userRole) {
 		super();
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
 		this.userEmail = userEmail;
 		this.userPassword = userPassword;
 		this.userStatus = userStatus;
+		this.userRole = userRole;
 	}
 
 	public long getUserId() {
@@ -93,6 +95,14 @@ public class User {
 
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
+	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 
 }
