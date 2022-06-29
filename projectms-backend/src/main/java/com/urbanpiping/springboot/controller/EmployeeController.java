@@ -60,7 +60,7 @@ public class EmployeeController {
 		employee.setEmployeeEmail(employeeDetails.getEmployeeEmail());
 		employee.setEmployeeContact(employeeDetails.getEmployeeContact());
 		employee.setEmployeeLocation(employeeDetails.getEmployeeLocation());
-		employee.setEmployeeRole(employeeDetails.getEmployeeLocation());
+		employee.setEmployeeRole(employeeDetails.getEmployeeRole());
 		employee.setEmployeeDept(employeeDetails.getEmployeeDept());
 
 		Employee updatedEmployee = employeeRepository.save(employee);

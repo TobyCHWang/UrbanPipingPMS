@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "projects")
 public class Project {
@@ -25,9 +27,11 @@ public class Project {
 	private String projectDesc;
 
 	@Column(name = "projectStartDate")
+//	@JsonFormat(pattern = "yyyy/MM/dd")
 	private Date projectStartDate;
 
 	@Column(name = "projectDueDate")
+//	@JsonFormat(pattern = "yyyy/MM/dd")
 	private Date projectDueDate;
 
 	@Column(name = "projectCity")

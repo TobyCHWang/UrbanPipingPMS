@@ -76,7 +76,7 @@ class ListEmployeeComponent extends Component {
                   <td>{employee.employeeContact}</td>
                   <td>{employee.employeeLocation}</td>
                   <td>{employee.employeeRole}</td>
-                  <td>{employee.employeeDepartment}</td>
+                  <td>{employee.employeeDept}</td>
                   <td>
                     <button
                       className="btn btn-info"

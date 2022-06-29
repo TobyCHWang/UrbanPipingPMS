@@ -9,74 +9,88 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const locales = {
-    "en-US": require("date-fns/locale/en-US")
-}
+  "en-US": require("date-fns/locale/en-US"),
+};
 
 const localizer = dateFnsLocalizer({
-    format,
-    parse,
-    startOfWeek,
-    getDay,
-    locales
-})
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales,
+});
 
 const events = [
-    {
-        title: "Big meeting",
-        allDay: true,
-        start: new Date(2022, 6, 0),
-        end: new Date(2022, 6, 0)
-    },
-    {
-        title: "vacation",
-        allDay: true,
-        start: new Date(2022, 6, 0),
-        end: new Date(2022, 6, 0)
-    },
-    {
-        title: "conderence",
-        allDay: true,
-        start: new Date(2022, 6, 7),
-        end: new Date(2022, 6, 10)
-    },
-]
+  {
+    title: "Big meeting",
+    allDay: true,
+    start: new Date(2022, 6, 0),
+    end: new Date(2022, 6, 0),
+  },
+  {
+    title: "vacation",
+    allDay: true,
+    start: new Date(2022, 6, 0),
+    end: new Date(2022, 6, 0),
+  },
+  {
+    title: "conderence",
+    allDay: true,
+    start: new Date(2022, 6, 7),
+    end: new Date(2022, 6, 10),
+  },
+];
 
 function CalendarComponent() {
-    const [newEvent, setNewEvent] = useState({ title: '', start: '', end: '' })
-    const [allEvents, setAllEvents] = useState(events)
+  const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
+  const [allEvents, setAllEvents] = useState(events);
 
-    function handleAddEvent() {
-        setAllEvents([...allEvents, newEvent]);
-    }
+  function handleAddEvent() {
+    setAllEvents([...allEvents, newEvent]);
+  }
 
-    return (
-        <div className="App">
-            <h1>Calendar</h1>
-            <h2>Add new Event</h2>
-            <div>
-                <input type="text" placeholder="Add Title" style={{ width: "20%", marginRight: "10px" }}
-                    value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })} />
-                <ReactDatePicker placeholderText="Start Date" style={{ marginRight: "10px" }}
-                    selected={newEvent.start} onChange={(start) => setNewEvent({ ...newEvent, start })} />
+  return (
+    <div className="App">
+      <h1>Calendar</h1>
+      <h2>Add new Event</h2>
+      <div>
+        <input
+          type="text"
+          placeholder="Add Title"
+          style={{ width: "20%", marginRight: "10px" }}
+          value={newEvent.title}
+          onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
+        />
+        <ReactDatePicker
+          placeholderText="Start Date"
+          style={{ marginRight: "10px" }}
+          selected={newEvent.start}
+          onChange={(start) => setNewEvent({ ...newEvent, start })}
+        />
 
-                <ReactDatePicker placeholderText="End Date"
-                    selected={newEvent.end} onChange={(end) => setNewEvent({ ...newEvent, end })} />
+        <ReactDatePicker
+          placeholderText="End Date"
+          selected={newEvent.end}
+          onChange={(end) => setNewEvent({ ...newEvent, end })}
+        />
 
-                <button style={{ marginTop: "10px" }} onClick={handleAddEvent}>Add Event</button>
-            </div>
+        <button style={{ marginTop: "10px" }} onClick={handleAddEvent}>
+          Add Event
+        </button>
+      </div>
 
-            <Calendar
-                localizer={localizer}
-                events={allEvents}
-                startAccessor="start"
-                endAccessor={(event) => { 
-                    let day=event.end.getDate()+1;
-                    return new Date(event.end.getFullYear(),event.end.getMonth(),day);
-                
-                }}
-                style={{ height: 500, margin: "50px" }} />
-        </div>
-    )
+      <Calendar
+        localizer={localizer}
+        events={allEvents}
+        startAccessor="start"
+        endAccessor={(event) => {
+          let day = event.end.getDate() + 1;
+          return new Date(event.end.getFullYear(), event.end.getMonth(), day);
+        }}
+        style={{ height: 500, margin: "50px" }}
+      />
+    </div>
+  );
 }
 
-export default CalendarComponent
+export default CalendarComponent;
