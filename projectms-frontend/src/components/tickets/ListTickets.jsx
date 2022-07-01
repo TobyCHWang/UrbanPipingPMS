@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import SearchForm from "./searchform/SearchForm";
 import TicketTable from "./tickettable/TicketTable";
 import tickets from "../../assets/data/dummytickets.json";
+import { useNavigate } from "react-router-dom";
 
 const ListTickets = () => {
   const [str, setStr] = useState("");
@@ -26,6 +27,7 @@ const ListTickets = () => {
     setDispTicket(displayTickets);
   };
 
+  let navigate = useNavigate();
   return (
     <Container>
       <Row>
@@ -35,7 +37,14 @@ const ListTickets = () => {
       </Row>
       <Row className="mt-4">
         <Col>
-          <Button variant="info">Add New Ticket</Button>
+          <Button
+            variant="info"
+            onClick={() => {
+              navigate("/add-ticket");
+            }}
+          >
+            Add New Ticket
+          </Button>
         </Col>
         <Col className="text-right">
           <SearchForm handleOnChange={handleOnChange} str={str} />
