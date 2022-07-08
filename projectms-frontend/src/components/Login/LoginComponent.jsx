@@ -1,7 +1,42 @@
+import { useState } from "react";
+import { useEffect } from "react";
 import "./Login.css";
 import LogoTransparent from "./LogoTransparent.png";
 
+
 function LoginComponent() {
+
+  const [jwt, setJwt] = useState("");
+  
+  useEffect(() => {
+    const reqBody = {
+      "userName": "aa",
+      "password": "aa"
+    };
+
+    fetch("api/auth/login", {
+      headers:{
+        "Content-Type": "application/json",
+      },
+      method:"post",
+      body:JSON.stringify(reqBody),
+    }).then((respose) => Promise.all([respose.json(), respose.headers]))
+    .then(([body, headers]) =>{
+      setJwt(headers.get("authorization"));
+      
+    
+    });
+  }, []);
+
+  useEffect (() =>{
+    console.log(`JWT is: ${jwt}`)
+  }, [jwt])
+ 
+
+    
+
+ 
+
   return (
     <div className="Login">
       <img
@@ -45,6 +80,7 @@ function LoginComponent() {
               type="button"
               className="btn btn-primary"
               style={{ width: "300px", height: "45px" }}
+              
             >
               LOGIN
             </button>
