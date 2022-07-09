@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const TASK_API_BASE_URL = "http://localhost:8080/api/v1/tasks";
+const TASK_API_BASE_URL = "api/auth/tasks";
 
 class TaskService {
 
