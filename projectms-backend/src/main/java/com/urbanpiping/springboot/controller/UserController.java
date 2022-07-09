@@ -20,9 +20,9 @@ import com.urbanpiping.springboot.exception.ResourceNotFoundException;
 import com.urbanpiping.springboot.model.User;
 import com.urbanpiping.springboot.repository.UserRepository;
 
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/auth/")
 public class UserController {
 
 	@Autowired

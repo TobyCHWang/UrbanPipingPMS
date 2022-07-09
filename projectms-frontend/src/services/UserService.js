@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const USER_API_BASE_URL = "api/v1/users";
+const USER_API_BASE_URL = "api/auth/users";
 
 class UserService {
 
