@@ -27,6 +27,7 @@ import ListTickets from './components/tickets/ListTickets';
 import ViewTicket from './components/tickets/ViewTicket';
 import LoginComponent from './components/login/LoginComponent';
 import CreateTicket from './components/tickets/CreateTicket';
+import PrivateRoute from './components/privateRoute';
 
 function App() {
   return (
@@ -35,15 +36,29 @@ function App() {
       <Router>
         <div className='container'>
           <Routes>
-            <Route path='/homepage' element={<HomePageComponent />} />
+           {/* homepage */}
+            <Route path='/homepage' 
+            element={
+             <PrivateRoute>
+              <HomePageComponent />
+             </PrivateRoute>
+            } />
             {/* Employee */}
-            <Route path='/employees' element={<ListEmployeeComponent />} />
-            <Route path='/add-employee/:id' element={<CreateEmployeeComponent />} />
-            <Route path='/view-employee/:id' element={<ViewEmployeeComponent />} />
+            <Route path='/employees' 
+            element={
+            
+            <ListEmployeeComponent />} />
+            <Route path='/add-employee/:id' 
+            element={<CreateEmployeeComponent />} />
+            <Route path='/view-employee/:id' 
+            element={<ViewEmployeeComponent />} />
             {/* Project */}
-            <Route path='/projects' element={<ListProjectComponent />} />
-            <Route path='/add-project/:id' element={<CreateProjectComponent />} />
-            <Route path='/view-project/:id' element={<ViewProjectComponent />} />
+            <Route path='/projects' 
+            element={<ListProjectComponent />} />
+            <Route path='/add-project/:id' 
+            element={<CreateProjectComponent />} />
+            <Route path='/view-project/:id' 
+            element={<ViewProjectComponent />} />
             {/* Client */}
             <Route path='/clients' element={<ListClientComponent />} />
             <Route path='/add-client/:id' element={<CreateClientComponent />} />

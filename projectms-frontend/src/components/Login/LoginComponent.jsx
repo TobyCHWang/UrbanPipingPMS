@@ -1,41 +1,45 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { useLocalState } from "../../util/useLocalStorage";
 import "./Login.css";
 import LogoTransparent from "./LogoTransparent.png";
 
 
 function LoginComponent() {
+  const [jwt, setJwt] = useLocalState("","jwt");
+  const [username,setUsername] = useState("");
+  const [password,setPassword] = useState("");
 
-  const [jwt, setJwt] = useState("");
-  
-  useEffect(() => {
-    const reqBody = {
-      "userName": "aa",
-      "password": "aa"
-    };
-
-    fetch("api/auth/login", {
-      headers:{
-        "Content-Type": "application/json",
-      },
-      method:"post",
-      body:JSON.stringify(reqBody),
-    }).then((respose) => Promise.all([respose.json(), respose.headers]))
-    .then(([body, headers]) =>{
-      setJwt(headers.get("authorization"));
-      
+  function sendLoginRequest(){
     
-    });
-  }, []);
-
-  useEffect (() =>{
-    console.log(`JWT is: ${jwt}`)
-  }, [jwt])
- 
-
+        const reqBody = {
+          "userName": username,
+          "password": password,
+        };
     
+        fetch("api/auth/login", {
+          headers:{
+            "Content-Type": "application/json",
+          },
+          method:"post",
+          body:JSON.stringify(reqBody),
+        }).then((respose) => {
+          if(respose.status === 200){
+            return Promise.all([respose.json(), respose.headers])
+          }else{
+            return Promise.reject("Invalid login attempt");
+          }
+          })
+        .then(([body, headers]) =>{
+          setJwt(headers.get("authorization"));
+          window.location.href="/homepage";
+        }).catch((messge)=>{
+          alert(messge);
+        });
+  }
 
- 
+
+
 
   return (
     <div className="Login">
@@ -52,19 +56,21 @@ function LoginComponent() {
           <h1>LOGIN</h1>
           <br></br>
           <div className="form-group" align="center">
-            <label className="control-label-email">Email</label>
+            <label className="control-label-email">UserName</label>
             <i class="bi-thin bi-envelope" aria-hidden="true"></i>
             <input
               type="text"
               className="form-control"
               placeholder="Enter Email"
               style={{ width: "300px", height: "45px" }}
+              value={username}
+              onChange={(event)=>setUsername(event.target.value)}
             />
             <br></br>
           </div>
           <div className="form-group2" align="center">
             <label className="control-label" a>
-              Token
+              Password
             </label>
             <i class="bi-thin bi-lock" aria-hidden="true"></i>
             <input
@@ -72,6 +78,8 @@ function LoginComponent() {
               className="form-control"
               placeholder="Enter Token"
               style={{ width: "300px", height: "45px" }}
+              value={password}
+              onChange={(event)=>setPassword(event.target.value)}
             />
           </div>
           &nbsp; &nbsp;
@@ -80,7 +88,7 @@ function LoginComponent() {
               type="button"
               className="btn btn-primary"
               style={{ width: "300px", height: "45px" }}
-              
+              onClick={()=>sendLoginRequest()}
             >
               LOGIN
             </button>
