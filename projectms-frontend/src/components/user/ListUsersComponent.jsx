@@ -23,11 +23,11 @@ class ListUsersComponent extends Component {
   }
 
   addUser() {
-    this.props.navigate(`/add-user/_add`);
+    this.props.navigate(`/_addUser`);
   }
 
   editUser(id) {
-    this.props.navigate(`/add-user/${id}`);
+    this.props.navigate(`/${id}`);
   }
 
   deleteUser(id) {

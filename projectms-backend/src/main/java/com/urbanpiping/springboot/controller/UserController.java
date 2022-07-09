@@ -6,7 +6,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,9 @@ public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
 
 	// get all users
 	@GetMapping("/users")
@@ -37,6 +41,7 @@ public class UserController {
 	// create user rest api
 	@PostMapping("/users")
 	public User createUser(@RequestBody User user) {
+		user.setUserPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
 
@@ -56,7 +61,7 @@ public class UserController {
 		user.setUserFirstName(userDetails.getUserFirstName());
 		user.setUserLastName(userDetails.getUserLastName());
 		user.setUserEmail(userDetails.getUserEmail());
-		user.setUserPassword(userDetails.getUserPassword());
+		user.setUserPassword(passwordEncoder.encode(userDetails.getUserPassword()));
 		user.setUserStatus(userDetails.getUserStatus());
 		user.setUserRole(userDetails.getUserRole());
 		

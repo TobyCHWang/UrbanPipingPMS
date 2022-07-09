@@ -20,7 +20,7 @@ class ListClientComponent extends Component {
   }
 
   addClient() {
-    this.props.navigate(`/add-client/_add`);
+    this.props.navigate(`/_addClient`);
   }
 
   editClient(id) {
