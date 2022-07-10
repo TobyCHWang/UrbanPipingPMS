@@ -39,7 +39,7 @@ class ListUsersComponent extends Component {
   }
 
   viewUser(id) {
-    this.props.navigate(`/view-user/${id}`);
+    this.props.navigate(`/${id}&viewUser=${"view"}`);
   }
 
   render() {

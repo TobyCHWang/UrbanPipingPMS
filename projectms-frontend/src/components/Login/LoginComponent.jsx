@@ -7,6 +7,7 @@ import LogoTransparent from "./LogoTransparent.png";
 
 function LoginComponent() {
   const [jwt, setJwt] = useLocalState("","jwt");
+  const [role,setRole] = useLocalState("","role");
   const [username,setUsername] = useState("");
   const [password,setPassword] = useState("");
 
@@ -32,7 +33,13 @@ function LoginComponent() {
           })
         .then(([body, headers]) =>{
           setJwt(headers.get("authorization"));
-          window.location.href="/homepage";
+          setRole(body);
+          if(body.userRole === "client"){
+            window.location.href="/clientHomepage";
+          }else{
+            window.location.href="/homepage";
+          }
+          
         }).catch((messge)=>{
           alert(messge);
         });

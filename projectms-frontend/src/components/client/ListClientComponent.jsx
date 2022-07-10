@@ -20,11 +20,11 @@ class ListClientComponent extends Component {
   }
 
   addClient() {
-    this.props.navigate(`/_addClient`);
+    this.props.navigate(`/_addClient&clientAdd=${"add"}`);
   }
 
   editClient(id) {
-    this.props.navigate(`/add-client/${id}`);
+    this.props.navigate(`/${id}&clientAdd=${"update"}`);
   }
 
   deleteClient(id) {
@@ -36,7 +36,7 @@ class ListClientComponent extends Component {
   }
 
   viewClient(id) {
-    this.props.navigate(`/view-client/${id}`);
+    this.props.navigate(`/${id}&clientView=${"view"}`);
   }
 
   render() {
