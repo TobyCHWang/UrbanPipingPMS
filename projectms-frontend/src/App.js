@@ -28,6 +28,10 @@ import ViewTicket from './components/tickets/ViewTicket';
 import LoginComponent from './components/login/LoginComponent';
 import CreateTicket from './components/tickets/CreateTicket';
 import PrivateRoute from './components/privateRoute';
+import ClientHomePageComponent from './components/ClientHomePageComponent';
+import AdminRolePrivateRoute from './components/privateRoute/adminRole';
+
+
 
 function App() {
   return (
@@ -43,19 +47,30 @@ function App() {
               <HomePageComponent />
              </PrivateRoute>
             } />
+
+             {/* Clienthomepage */}
+             <Route path='/clientHomepage' 
+            element={
+             <PrivateRoute>
+              <ClientHomePageComponent/>
+             </PrivateRoute>
+            } />
+
             {/* Employee */}
             <Route path='/employees' 
             element={
             <PrivateRoute>
-              <ListEmployeeComponent />
+              <AdminRolePrivateRoute>
+                <ListEmployeeComponent />
+              </AdminRolePrivateRoute>
               </PrivateRoute>} />
-            <Route path='/add-employee/:id' 
+            <Route path='/:id&employeeAdd=:add' 
             element={
               <PrivateRoute>
                 <CreateEmployeeComponent />
               </PrivateRoute>
             } />
-            <Route path='/view-employee/:id' 
+            <Route path='/:id&employeeView=:view' 
             element={
 
             <ViewEmployeeComponent />
@@ -68,13 +83,13 @@ function App() {
             <ListProjectComponent />
             
             } />
-            <Route path='/add-project/:id' 
+            <Route path='/:id&projectAdd=:add' 
             element={
             
             <CreateProjectComponent />
             
             } />
-            <Route path='/view-project/:id' 
+            <Route path='/:id&viewProject=:view' 
             element={
             
             <ViewProjectComponent />
@@ -86,12 +101,12 @@ function App() {
             <ListClientComponent />
             </PrivateRoute>
             } />
-            <Route path='/add-client/:id' element={
+            <Route path='/:id&clientAdd=:add' element={
             
             <CreateClientComponent />
             
             } />
-            <Route path='/view-client/:id' element={
+            <Route path='/:id&clientView=:view' element={
             
             <ViewClientComponent />
             
@@ -107,7 +122,7 @@ function App() {
             <CreateUserComponent />
             
             } />
-            <Route path='/view-user/:id' element={
+            <Route path='/:id&viewUser=:view' element={
             
             <ViewUserComponent />
             
@@ -118,12 +133,12 @@ function App() {
             <ListTaskComponent />
             
             } />
-            <Route path='/add-task/:id' element={
+            <Route path='/:id&taskAdd=:add' element={
             
             <CreateTaskComponent />
             
             } />
-            <Route path='/view-task/:id' element={
+            <Route path='/:id&viewTask=:view' element={
             
             <ViewTaskComponent />
             

@@ -5,9 +5,11 @@ import { useLocalState } from "../../util/useLocalStorage";
 
 function HeaderComponent() {
   const [jwt, setJwt] =useLocalState("","jwt");
+  const [role,setRole] = useLocalState("","role");
 
   function clean(){
     setJwt("");
+    setRole("");
     window.location.href="/";
   }
 
