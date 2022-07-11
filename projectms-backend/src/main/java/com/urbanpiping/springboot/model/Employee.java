@@ -1,6 +1,11 @@
 package com.urbanpiping.springboot.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "employees")
@@ -31,6 +36,10 @@ public class Employee {
 
 	@Column(name = "empDept")
 	private String employeeDept;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "employees")
+	@JsonIgnore
+	private Set<Task> tasks = new HashSet<>();
 
 	public Employee() {
 
@@ -110,6 +119,14 @@ public class Employee {
 
 	public void setEmployeeDept(String employeeDept) {
 		this.employeeDept = employeeDept;
+	}
+
+	public Set<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
 	}
 
 }

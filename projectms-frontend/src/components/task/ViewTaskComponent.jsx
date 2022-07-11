@@ -54,6 +54,7 @@ class ViewTaskComponent extends Component {
             </div>
             <div className="row">
               <label>Employee Assigned:</label>
+              {/* <div>{this.state.task.taskEmployees}</div> */}
               <div></div>
             </div>
           </div>
