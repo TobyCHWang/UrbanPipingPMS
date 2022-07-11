@@ -22,7 +22,7 @@ import com.urbanpiping.springboot.repository.TaskRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/auth/")
 public class TaskController {
 
 	@Autowired

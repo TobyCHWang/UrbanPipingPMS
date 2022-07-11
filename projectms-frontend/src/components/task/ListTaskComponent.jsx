@@ -23,11 +23,11 @@ class ListTaskComponent extends Component {
   }
 
   addTask() {
-    this.props.navigate(`/add-task/_addTask`);
+    this.props.navigate(`/_addTask&taskAdd=${"add"}`);
   }
 
   editTask(id) {
-    this.props.navigate(`/add-task/${id}`);
+    this.props.navigate(`/${id}&taskAdd=${"update"}`);
   }
 
   deleteTask(id) {
@@ -39,7 +39,7 @@ class ListTaskComponent extends Component {
   }
 
   viewTask(id) {
-    this.props.navigate(`/view-task/${id}`);
+    this.props.navigate(`/${id}&viewTask=${"view"}`);
   }
 
   render() {

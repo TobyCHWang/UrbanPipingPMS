@@ -23,11 +23,11 @@ class ListProjectComponent extends Component {
   }
 
   addProject() {
-    this.props.navigate(`/add-project/_addProject`);
+    this.props.navigate(`/_addProject&projectAdd=${"add"}`);
   }
 
   editProject(id) {
-    this.props.navigate(`/add-project/${id}`);
+    this.props.navigate(`/${id}&projectAdd=${"update"}`);
   }
 
   deleteProject(id) {
@@ -41,7 +41,7 @@ class ListProjectComponent extends Component {
   }
 
   viewProject(id) {
-    this.props.navigate(`/view-project/${id}`);
+    this.props.navigate(`/${id}&viewProject=${"view"}`);
   }
 
   render() {

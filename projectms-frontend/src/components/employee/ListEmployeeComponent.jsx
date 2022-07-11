@@ -23,11 +23,11 @@ class ListEmployeeComponent extends Component {
   }
 
   addEmployee() {
-    this.props.navigate(`/add-employee/_add`);
+    this.props.navigate(`/_add&employeeAdd=${"add"}`);
   }
 
   editEmployee(id) {
-    this.props.navigate(`/add-employee/${id}`);
+    this.props.navigate(`/${id}&employeeAdd=${"update"}`);
   }
 
   deleteEmployee(id) {
@@ -41,7 +41,7 @@ class ListEmployeeComponent extends Component {
   }
 
   viewEmployee(id) {
-    this.props.navigate(`/view-employee/${id}`);
+    this.props.navigate(`/${id}&employeeView=${"view"}`);
   }
 
   render() {

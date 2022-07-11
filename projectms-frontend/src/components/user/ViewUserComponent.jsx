@@ -9,6 +9,7 @@ class ViewUserComponent extends Component {
     this.state = {
       id: this.props.match.params.id,
       user: {},
+      test: this.props.match.params.test,
     };
   }
 
