@@ -8,8 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "projects")
@@ -27,11 +27,11 @@ public class Project {
 	private String projectDesc;
 
 	@Column(name = "projectStartDate")
-//	@JsonFormat(pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
 	private Date projectStartDate;
 
 	@Column(name = "projectDueDate")
-//	@JsonFormat(pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
 	private Date projectDueDate;
 
 	@Column(name = "projectCity")

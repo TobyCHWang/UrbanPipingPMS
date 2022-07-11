@@ -76,6 +76,7 @@ class ListTaskComponent extends Component {
                   <td>{task.taskStatus}</td>
                   <td>{task.taskType}</td>
                   <td>{task.taskPriority}</td>
+                  {/* <td>{task.taskEmployees}</td> */}
                   <td></td>
                   <td>
                     <button

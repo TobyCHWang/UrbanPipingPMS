@@ -165,6 +165,7 @@ function App() {
             <Route path='/tickets' element={<ListTickets />} />
             <Route path='/view-ticket' element={<ViewTicket />} />
             <Route path='/add-ticket' element={<CreateTicket />} />
+            <Route path='/edit-ticket/:id' element={<CreateTicket />} />
             {/* Login */}
             <Route path='/' element={<LoginComponent />} />
           </Routes>

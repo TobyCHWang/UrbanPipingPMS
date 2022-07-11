@@ -44,7 +44,7 @@ public class TaskController {
 	@GetMapping("/tasks/{id}")
 	public ResponseEntity<Task> getEmployeeById(@PathVariable Long id) {
 		Task task = taskRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Task not exist withid: " + id));
+				.orElseThrow(() -> new ResourceNotFoundException("Task not exist with id: " + id));
 		return ResponseEntity.ok(task);
 	}
 
@@ -62,6 +62,7 @@ public class TaskController {
 		task.setTaskStatus(taskDetails.getTaskStatus());
 		task.setTaskType(taskDetails.getTaskType());
 		task.setTaskPriority(taskDetails.getTaskPriority());
+//		task.setEmployees(taskDetails.getEmployees());
 		
 		Task updatedTask = taskRepository.save(task);
 		return ResponseEntity.ok(updatedTask);
