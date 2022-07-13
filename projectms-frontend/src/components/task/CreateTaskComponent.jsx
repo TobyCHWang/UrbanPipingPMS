@@ -11,8 +11,8 @@ class CreateTaskComponent extends Component {
       id: this.props.match.params.id,
       taskName: "",
       taskDesc: "",
-      taskStartDate: "",
-      taskDueDate: "",
+      taskStartDate: new Date(),
+      taskDueDate:  new Date(),
       taskStatus: "",
       taskType: "",
       taskPriority: "",
@@ -143,6 +143,8 @@ class CreateTaskComponent extends Component {
                       onChange={this.changeTaskDescHandler}
                     />
                   </div>
+            
+
                   <div className="form-group">
                     <label>Task Start Date: </label>
                     <input
