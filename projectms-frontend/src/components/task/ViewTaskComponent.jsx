@@ -8,8 +8,11 @@ class ViewTaskComponent extends Component {
 
     this.state = {
       id: this.props.match.params.id,
-      task: {},
+      task: [],
     };
+    this.editTask = this.editTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
+   
   }
 
   componentDidMount() {
@@ -17,6 +20,17 @@ class ViewTaskComponent extends Component {
       this.setState({ task: res.data });
     });
   }
+
+  editTask(id) {
+    this.props.navigate(`/${id}&taskAdd=${"update"}`);
+  }
+
+  deleteTask(id) {
+    TaskService.deleteTask(id).then((res) => {
+      this.props.navigate(`/calendar`);
+    })
+  }
+  
 
   render() {
     return (
@@ -57,6 +71,11 @@ class ViewTaskComponent extends Component {
               {/* <div>{this.state.task.taskEmployees}</div> */}
               <div></div>
             </div>
+            <button onClick={() => this.editTask(this.state.id)}>Update</button>
+            <button
+                      className="btn btn-danger"
+                      onClick={() => this.deleteTask(this.state.id)}
+                    >Delete</button>
           </div>
         </div>
       </div>
