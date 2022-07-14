@@ -22,7 +22,7 @@ import com.urbanpiping.springboot.repository.TicketRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/auth/")
 public class TicketController {
 
 	@Autowired

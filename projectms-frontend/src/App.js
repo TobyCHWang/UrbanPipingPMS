@@ -24,7 +24,6 @@ import CalendarComponent from './components/calendar/CalendarComponent';
 import ChatRoom from './components/message/ChatRoom';
 import GanttExport from './components/gantt/GanttExport';
 import ListTickets from './components/tickets/ListTickets';
-import ViewTicket from './components/tickets/ViewTicket';
 import LoginComponent from './components/login/LoginComponent';
 import CreateTicket from './components/tickets/CreateTicket';
 import PrivateRoute from './components/privateRoute';
@@ -163,9 +162,9 @@ function App() {
             } />
             {/* Tickets */}
             <Route path='/tickets' element={<ListTickets />} />
-            <Route path='/view-ticket' element={<ViewTicket />} />
-            <Route path='/add-ticket' element={<CreateTicket />} />
-            <Route path='/edit-ticket/:id' element={<CreateTicket />} />
+            <Route path='/:id&ticketAdd=:add' element={<CreateTicket />} />
+            {/* <Route path='/add-ticket' element={<CreateTicket />} /> */}
+            {/* <Route path='/edit-ticket/:id' element={<CreateTicket />} /> */}
             {/* Login */}
             <Route path='/' element={<LoginComponent />} />
           </Routes>

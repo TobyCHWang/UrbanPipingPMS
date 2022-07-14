@@ -23,8 +23,4 @@ class ClientHomePageComponent extends Component {
   }
 }
 
-<<<<<<< Updated upstream
 export default ClientHomePageComponent;
-=======
-export default HomePageComponent;
->>>>>>> Stashed changes

@@ -23,7 +23,8 @@ const CreateTicket = () => {
       ticketComment,
     };
 
-    if (id) {
+    if (id != "_addTicket") {
+      console.log(id);
       TicketService.updateTicket(id, ticket)
         .then((response) => {
           navigate(`/tickets`);
@@ -50,6 +51,7 @@ const CreateTicket = () => {
         setDetails(response.data.ticketDetails);
         setStatus(response.data.ticketStatus);
         setOpenedDate(response.data.ticketOpenedDate);
+        console.log(typeof response.data.ticketOpenedDate);
         setComment(response.data.ticketComment);
       })
       .catch((error) => {
@@ -58,7 +60,8 @@ const CreateTicket = () => {
   }, []);
 
   const title = () => {
-    if (id) {
+    if (id != "_addTicket") {
+      console.log(id);
       return <h2 className="text-info text-center">Update Ticket</h2>;
     } else {
       return <h2 className="text-info text-center">Add New Ticket</h2>;
