@@ -34,16 +34,10 @@ const TicketTable = ({ tickets, handleOnDelete }) => {
                         <td>{row.ticketSubject}</td>
                         <td>{row.ticketDetails}</td>
                         <td>{row.ticketStatus}</td>
-                        <td>
-                            {new Intl.DateTimeFormat("en-US", {
-                                year: "numeric",
-                                month: "long",
-                                day: "2-digit",
-                            }).format(new Date(row.ticketOpenedDate))}
-                        </td>
+                        <td>{row.ticketOpenedDate}</td>
                         <td>{row.ticketComment}</td>
                         <td>
-                            <Link className="btn btn-info" to={`/edit-ticket/${row.ticketId}`}>Update</Link>
+                            <Link className="btn btn-info" to={`/${row.ticketId}&ticketAdd=${"update"}`}>Update</Link>
                             <button className="btn btn-danger" onClick={() => deleteTicket(row.ticketId)} style={{ marginLeft: "10px" }}>Delete</button>
                         </td>
                     </tr>

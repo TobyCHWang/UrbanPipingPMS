@@ -49,7 +49,10 @@ const ListTickets = () => {
       </Row>
       <Row className="mt-4">
         <Col>
-          <Link to="/add-ticket" className="btn btn-primary mb-2">
+          <Link
+            to={`/_addTicket&ticketAdd=${"add"}`}
+            className="btn btn-primary mb-2"
+          >
             New Ticket
           </Link>
         </Col>

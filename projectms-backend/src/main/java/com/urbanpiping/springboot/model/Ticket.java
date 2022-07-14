@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tickets")
@@ -28,6 +30,7 @@ public class Ticket {
 	private String ticketStatus;
 
 	@Column(name = "ticketOpenedDate")
+	@Temporal(TemporalType.DATE)
 	private Date ticketOpenedDate;
 
 	@Column(name = "ticketComment")
