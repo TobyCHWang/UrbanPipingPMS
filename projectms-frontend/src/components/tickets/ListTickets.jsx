@@ -2,57 +2,67 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import SearchForm from "./searchform/SearchForm";
 import TicketTable from "./tickettable/TicketTable";
-import tickets from "../../assets/data/dummytickets.json";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import TicketService from "../../services/TicketService";
 
 const ListTickets = () => {
-  const [str, setStr] = useState("");
-  const [dispTicket, setDispTicket] = useState(tickets);
+  // const [str, setStr] = useState("");
+  // const [dispTicket, setDispTicket] = useState(tickets);
+  const [dispTicket, setDispTicket] = useState([]);
 
-  useEffect(() => {}, [str, dispTicket]);
+  // useEffect(() => {}, [str, dispTicket]);
+  useEffect(() => {
+    getAllTickets();
+  }, []);
 
-  const handleOnChange = (e) => {
-    const { value } = e.target;
-    // console.log(value);
-    setStr(value);
-    searchTicket(value);
+  const getAllTickets = () => {
+    TicketService.getTickets()
+      .then((response) => {
+        setDispTicket(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-  const searchTicket = (sttr) => {
-    const displayTickets = tickets.filter((row) =>
-      row.subject.toLowerCase().includes(sttr.toLowerCase())
-    );
+  // const handleOnChange = (e) => {
+  //   const { value } = e.target;
+  //   setStr(value);
+  //   searchTicket(value);
+  // };
 
-    // console.log(displayTickets);
-    setDispTicket(displayTickets);
-  };
+  // const searchTicket = (sttr) => {
+  //   const displayTickets = tickets.filter((row) =>
+  //     row.subject.toLowerCase().includes(sttr.toLowerCase())
+  //   );
+  //   setDispTicket(displayTickets);
+  // };
 
-  let navigate = useNavigate();
   return (
     <Container>
       <Row>
         {/* <Col>
           <Breadcrumb page="Ticket Lists" />
         </Col> */}
+        <h2 className="text-info text-center">Tickets List</h2>
       </Row>
       <Row className="mt-4">
         <Col>
-          <Button
-            variant="info"
-            onClick={() => {
-              navigate("/add-ticket");
-            }}
+          <Link
+            to={`/_addTicket&ticketAdd=${"add"}`}
+            className="btn btn-primary mb-2"
           >
-            Add New Ticket
-          </Button>
+            New Ticket
+          </Link>
         </Col>
         <Col className="text-right">
-          <SearchForm handleOnChange={handleOnChange} str={str} />
+          {/* <SearchForm handleOnChange={handleOnChange} str={str} /> */}
         </Col>
       </Row>
       <hr />
       <Col>
-        <TicketTable tickets={dispTicket} />
+        <TicketTable tickets={dispTicket} handleOnDelete={getAllTickets} />
       </Col>
     </Container>
   );

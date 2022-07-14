@@ -1,15 +1,22 @@
 package com.urbanpiping.springboot.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tasks")
@@ -27,11 +34,11 @@ public class Task {
 	private String taskDesc;
 
 	@Column(name = "taskStartDate")
-//	@JsonFormat(pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
 	private Date taskStartDate;
 
 	@Column(name = "taskDueDate")
-//	@JsonFormat(pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
 	private Date taskDueDate;
 
 	@Column(name = "taskStatus")
@@ -43,16 +50,22 @@ public class Task {
 	@Column(name = "taskPriority")
 	private String taskPriority;
 
-//	private int employeeId;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL, CascadeType.MERGE })
+	@JoinTable(name = "tasks_employees", joinColumns = {
+			@JoinColumn(name = "task_id")}, inverseJoinColumns = {
+					@JoinColumn(name = "emp_id") })
+	private Set<Employee> employees = new HashSet<>();
+
 //	private int photoId;
 
 	public Task() {
 
 	}
 
-	public Task(String taskName, String taskDesc, Date taskStartDate, Date taskDueDate, String taskStatus,
+	public Task(long taskId, String taskName, String taskDesc, Date taskStartDate, Date taskDueDate, String taskStatus,
 			String taskType, String taskPriority) {
 		super();
+		this.taskId = taskId;
 		this.taskName = taskName;
 		this.taskDesc = taskDesc;
 		this.taskStartDate = taskStartDate;
@@ -124,6 +137,20 @@ public class Task {
 
 	public void setTaskPriority(String taskPriority) {
 		this.taskPriority = taskPriority;
+	}
+
+	public void addEmployee(Employee employee) {
+		this.employees.add(employee);
+		employee.getTasks().add(this);
+	}
+
+	public void removeEmployee(long employeeId) {
+		Employee employee = this.employees.stream().filter(e -> e.getEmployeeId() == employeeId).findFirst()
+				.orElse(null);
+		if (employee != null) {
+			this.employees.remove(employee);
+			employee.getTasks().remove(this);
+		}
 	}
 
 }
