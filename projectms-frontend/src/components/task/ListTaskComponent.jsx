@@ -59,6 +59,7 @@ class ListTaskComponent extends Component {
                 <th>Description</th>
                 <th>Start Date</th>
                 <th>Due Date</th>
+                <th>Duration</th>
                 <th>Status</th>
                 <th>Task Type</th>
                 <th>Priority</th>
@@ -73,6 +74,7 @@ class ListTaskComponent extends Component {
                   <td>{task.taskDesc}</td>
                   <td>{task.taskStartDate}</td>
                   <td>{task.taskDueDate}</td>
+                  <td>{task.taskDuration}</td>
                   <td>{task.taskStatus}</td>
                   <td>{task.taskType}</td>
                   <td>{task.taskPriority}</td>

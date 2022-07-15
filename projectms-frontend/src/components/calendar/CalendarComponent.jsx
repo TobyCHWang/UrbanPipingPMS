@@ -23,8 +23,6 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-
-
 // const events = [
 //   {
 //     title: "Big meeting",
@@ -47,47 +45,48 @@ const localizer = dateFnsLocalizer({
 // ];
 
 function CalendarComponent() {
-  const [taskList,setTaskList] = useState([]);
-  
+  const [taskList, setTaskList] = useState([]);
 
-  useEffect(() =>{
-    TaskService.getTasks().then((response) =>{
-      setTaskList(response.data)
-    })
-  }, [])
+  useEffect(() => {
+    TaskService.getTasks().then((response) => {
+      setTaskList(response.data);
+    });
+  }, []);
 
-  const events= taskList.map((res)=>{
-   
-   let start = new Date(res.taskStartDate)
-   let startDate= new Date(start.getFullYear(),start.getMonth(),start.getDate()+1)
-   
-   let end = new Date(res.taskDueDate)
-   let endDate= new Date(end.getFullYear(),end.getMonth(),end.getDate()+2)
-   
+  const events = taskList.map((res) => {
+    let start = new Date(res.taskStartDate);
+    let startDate = new Date(
+      start.getFullYear(),
+      start.getMonth(),
+      start.getDate() + 1
+    );
+
+    let end = new Date(res.taskDueDate);
+    let endDate = new Date(
+      end.getFullYear(),
+      end.getMonth(),
+      end.getDate() + 2
+    );
+
     return {
-      id:res.taskId,
+      id: res.taskId,
       title: res.taskName,
       start: startDate,
       end: endDate,
-      allDay: true
-    }
-    
-  })
-
-
+      allDay: true,
+    };
+  });
 
   let navigate = useNavigate();
   // const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
   // const [selected, setSelected] = useState(events);
 
-const [selected, setSelected] = useState();
+  const [selected, setSelected] = useState();
 
-const handleSelected = (event) => {
-  setSelected(event);
-  navigate(`/${event.id}&viewTask=${"view"}`);
-};
-  
- 
+  const handleSelected = (event) => {
+    setSelected(event);
+    navigate(`/${event.id}&viewTask=${"view"}`);
+  };
 
   // function handleAddEvent() {
   //   setAllEvents([...allEvents, newEvent]);
@@ -95,8 +94,6 @@ const handleSelected = (event) => {
 
   return (
     <div className="App">
-      
-      
       <div>
         {/* <input
           type="text"
@@ -118,27 +115,24 @@ const handleSelected = (event) => {
           onChange={(end) => setNewEvent({ ...newEvent, end })}
         /> */}
 
-        <button style={{ marginTop: "10px" }} onClick={() => {
-              navigate(`/_addTask&taskAdd=${"add"}`);
-            }}>
+        <button
+          style={{ marginTop: "10px" }}
+          onClick={() => {
+            navigate(`/_addTask&taskAdd=${"add"}`);
+          }}
+        >
           Add Event
         </button>
       </div>
-
-      
-      
 
       <Calendar
         localizer={localizer}
         events={events}
         startAccessor={events.start}
-        endAccessor= {events.end}
+        endAccessor={events.end}
         style={{ height: 500, margin: "50px" }}
         onSelectEvent={handleSelected}
       />
-
-
-      
     </div>
   );
 }

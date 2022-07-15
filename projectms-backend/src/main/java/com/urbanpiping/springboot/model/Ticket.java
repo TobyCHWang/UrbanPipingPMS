@@ -1,5 +1,6 @@
 package com.urbanpiping.springboot.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -81,7 +82,10 @@ public class Ticket {
 	}
 
 	public void setTicketOpenedDate(Date ticketOpenedDate) {
-		this.ticketOpenedDate = ticketOpenedDate;
+		Calendar c = Calendar.getInstance();
+		c.setTime(ticketOpenedDate);
+		c.add(Calendar.DATE, 1);
+		this.ticketOpenedDate = c.getTime();
 	}
 
 	public String getTicketComment() {
