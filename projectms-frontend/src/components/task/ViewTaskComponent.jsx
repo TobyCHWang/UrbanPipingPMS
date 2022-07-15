@@ -12,7 +12,6 @@ class ViewTaskComponent extends Component {
     };
     this.editTask = this.editTask.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
-   
   }
 
   componentDidMount() {
@@ -28,9 +27,8 @@ class ViewTaskComponent extends Component {
   deleteTask(id) {
     TaskService.deleteTask(id).then((res) => {
       this.props.navigate(`/calendar`);
-    })
+    });
   }
-  
 
   render() {
     return (
@@ -55,6 +53,10 @@ class ViewTaskComponent extends Component {
               <div>{this.state.task.taskDueDate}</div>
             </div>
             <div className="row">
+              <label>Task Duration: </label>
+              <div>{this.state.task.taskDuration}</div>
+            </div>
+            <div className="row">
               <label>Status:</label>
               <div>{this.state.task.taskStatus}</div>
             </div>
@@ -73,9 +75,11 @@ class ViewTaskComponent extends Component {
             </div>
             <button onClick={() => this.editTask(this.state.id)}>Update</button>
             <button
-                      className="btn btn-danger"
-                      onClick={() => this.deleteTask(this.state.id)}
-                    >Delete</button>
+              className="btn btn-danger"
+              onClick={() => this.deleteTask(this.state.id)}
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>

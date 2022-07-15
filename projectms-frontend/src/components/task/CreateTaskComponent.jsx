@@ -12,7 +12,7 @@ class CreateTaskComponent extends Component {
       taskName: "",
       taskDesc: "",
       taskStartDate: new Date(),
-      taskDueDate:  new Date(),
+      taskDueDate: new Date(),
       taskStatus: "",
       taskType: "",
       taskPriority: "",
@@ -151,7 +151,6 @@ class CreateTaskComponent extends Component {
                       onChange={this.changeTaskDescHandler}
                     />
                   </div>
-            
 
                   <div className="form-group">
                     <label>Task Start Date: </label>

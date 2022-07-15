@@ -59,41 +59,41 @@ public class EmployeeController {
 //		List<Task> tasks = taskRepository.findTasksByEmployeesId(employeeId);
 //		return new ResponseEntity<>(tasks, HttpStatus.OK);
 //	}
-
-	// create or add employee for a task
-	@PostMapping("/tasks/{taskId}/employees")
-	public ResponseEntity<Employee> addEmployee(@PathVariable(value = "taskId") Long taskId,
-			@RequestBody Employee employeeDetails) {
-		Employee employee = taskRepository.findById(taskId).map(task -> {
-			long employeeId = employeeDetails.getEmployeeId();
-
-			// employee exists
-			if (employeeId != 0L) {
-				Employee _employee = employeeRepository.findById(employeeId)
-						.orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + employeeId));
-				task.addEmployee(_employee);
-				taskRepository.save(task);
-				return _employee;
-			}
-
-			// add and create new employee
-			task.addEmployee(employeeDetails);
-			return employeeRepository.save(employeeDetails);
-		}).orElseThrow(() -> new ResourceNotFoundException("Task not found with id: " + taskId));
-		return new ResponseEntity<>(employee, HttpStatus.CREATED);
-	}
-
-	// delete an employee from a task by id
-	@DeleteMapping("tasks/{taskId}/employees/{employeeId}")
-	public ResponseEntity<HttpStatus> deleteEmployeeFromTask(@PathVariable(value = "taskId") Long taskId,
-			@PathVariable(value = "employeeId") Long employeeId) {
-		Task task = taskRepository.findById(taskId)
-				.orElseThrow(() -> new ResourceNotFoundException("Task not found with id: " + taskId));
-
-		task.removeEmployee(employeeId);
-		taskRepository.save(task);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
+//
+//	// create or add employee for a task
+//	@PostMapping("/tasks/{taskId}/employees")
+//	public ResponseEntity<Employee> addEmployee(@PathVariable(value = "taskId") Long taskId,
+//			@RequestBody Employee employeeDetails) {
+//		Employee employee = taskRepository.findById(taskId).map(task -> {
+//			long employeeId = employeeDetails.getEmployeeId();
+//
+//			// employee exists
+//			if (employeeId != 0L) {
+//				Employee _employee = employeeRepository.findById(employeeId)
+//						.orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + employeeId));
+//				task.addEmployee(_employee);
+//				taskRepository.save(task);
+//				return _employee;
+//			}
+//
+//			// add and create new employee
+//			task.addEmployee(employeeDetails);
+//			return employeeRepository.save(employeeDetails);
+//		}).orElseThrow(() -> new ResourceNotFoundException("Task not found with id: " + taskId));
+//		return new ResponseEntity<>(employee, HttpStatus.CREATED);
+//	}
+//
+//	// delete an employee from a task by id
+//	@DeleteMapping("tasks/{taskId}/employees/{employeeId}")
+//	public ResponseEntity<HttpStatus> deleteEmployeeFromTask(@PathVariable(value = "taskId") Long taskId,
+//			@PathVariable(value = "employeeId") Long employeeId) {
+//		Task task = taskRepository.findById(taskId)
+//				.orElseThrow(() -> new ResourceNotFoundException("Task not found with id: " + taskId));
+//
+//		task.removeEmployee(employeeId);
+//		taskRepository.save(task);
+//		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//	}
 
 	// create employee rest api
 	@PostMapping("/employees")

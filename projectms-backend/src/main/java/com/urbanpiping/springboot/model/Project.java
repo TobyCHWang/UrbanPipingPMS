@@ -1,5 +1,6 @@
 package com.urbanpiping.springboot.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -99,7 +100,10 @@ public class Project {
 	}
 
 	public void setProjectStartDate(Date projectStartDate) {
-		this.projectStartDate = projectStartDate;
+		Calendar c = Calendar.getInstance();
+		c.setTime(projectStartDate);
+		c.add(Calendar.DATE, 1);
+		this.projectStartDate = c.getTime();
 	}
 
 	public Date getProjectDueDate() {
@@ -107,7 +111,10 @@ public class Project {
 	}
 
 	public void setProjectDueDate(Date projectDueDate) {
-		this.projectDueDate = projectDueDate;
+		Calendar c = Calendar.getInstance();
+		c.setTime(projectDueDate);
+		c.add(Calendar.DATE, 1);
+		this.projectDueDate = c.getTime();
 	}
 
 	public String getProjectCity() {
