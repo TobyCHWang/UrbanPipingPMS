@@ -1,5 +1,6 @@
 package com.urbanpiping.springboot.model;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -50,10 +51,12 @@ public class Task {
 	@Column(name = "taskPriority")
 	private String taskPriority;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL, CascadeType.MERGE })
-	@JoinTable(name = "tasks_employees", joinColumns = {
-			@JoinColumn(name = "task_id")}, inverseJoinColumns = {
-					@JoinColumn(name = "emp_id") })
+	@Column(name = "taskDuration")
+	private String taskDuration;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "tasks_employees", joinColumns = { @JoinColumn(name = "taskId") }, inverseJoinColumns = {
+			@JoinColumn(name = "empId") })
 	private Set<Employee> employees = new HashSet<>();
 
 //	private int photoId;
@@ -104,7 +107,10 @@ public class Task {
 	}
 
 	public void setTaskStartDate(Date taskStartDate) {
-		this.taskStartDate = taskStartDate;
+		Calendar c = Calendar.getInstance();
+		c.setTime(taskStartDate);
+		c.add(Calendar.DATE, 1);
+		this.taskStartDate = c.getTime();
 	}
 
 	public Date getTaskDueDate() {
@@ -112,7 +118,18 @@ public class Task {
 	}
 
 	public void setTaskDueDate(Date taskDueDate) {
-		this.taskDueDate = taskDueDate;
+		Calendar c = Calendar.getInstance();
+		c.setTime(taskDueDate);
+		c.add(Calendar.DATE, 1);
+		this.taskDueDate = c.getTime();
+	}
+
+	public String getTaskDuration() {
+		return taskDuration;
+	}
+
+	public void setTaskDuration(String taskDuration) {
+		this.taskDuration = taskDuration;
 	}
 
 	public String getTaskStatus() {
@@ -139,18 +156,12 @@ public class Task {
 		this.taskPriority = taskPriority;
 	}
 
-	public void addEmployee(Employee employee) {
-		this.employees.add(employee);
-		employee.getTasks().add(this);
+	public Set<Employee> getEmployees() {
+		return employees;
 	}
 
-	public void removeEmployee(long employeeId) {
-		Employee employee = this.employees.stream().filter(e -> e.getEmployeeId() == employeeId).findFirst()
-				.orElse(null);
-		if (employee != null) {
-			this.employees.remove(employee);
-			employee.getTasks().remove(this);
-		}
+	public void setEmployees(Set<Employee> employees) {
+		this.employees = employees;
 	}
 
 }

@@ -5,8 +5,6 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -37,8 +35,7 @@ public class Employee {
 	@Column(name = "empDept")
 	private String employeeDept;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "employees")
-	@JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employees")
 	private Set<Task> tasks = new HashSet<>();
 
 	public Employee() {
