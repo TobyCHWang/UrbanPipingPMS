@@ -37,8 +37,6 @@ public class Ticket {
 	@Column(name = "ticketComment")
 	private String ticketComment;
 
-//	private int clientId;
-
 	public Ticket() {
 
 	}

@@ -1,10 +1,16 @@
 package com.urbanpiping.springboot.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -39,6 +45,14 @@ public class Client {
 	
 	@Column(name = "clientProvince")
 	private String clientProvince;
+	
+	@OneToMany(cascade =  CascadeType.ALL)
+	@JoinColumn(name = "client_proj_fk", referencedColumnName = "clientId")
+	Set<Project> projects = new HashSet<>();
+	
+	@OneToMany(cascade =  CascadeType.ALL)
+	@JoinColumn(name = "client_ticket_fk", referencedColumnName = "clientId")
+	Set<Ticket> tickets = new HashSet<>();
 	
 	public Client() {
 		

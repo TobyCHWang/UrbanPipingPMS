@@ -59,8 +59,6 @@ public class Task {
 			@JoinColumn(name = "empId") })
 	private Set<Employee> employees = new HashSet<>();
 
-//	private int photoId;
-
 	public Task() {
 
 	}

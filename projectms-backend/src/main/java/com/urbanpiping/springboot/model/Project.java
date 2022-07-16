@@ -2,12 +2,17 @@ package com.urbanpiping.springboot.model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -50,7 +55,9 @@ public class Project {
 	@Column(name = "projectStatus")
 	private String projectStatus;
 
-//	private int clientId;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "proj_task_fk", referencedColumnName = "projectId")
+	Set<Task> tasks = new HashSet<>();
 
 	public Project() {
 
@@ -155,6 +162,14 @@ public class Project {
 
 	public void setProjectStatus(String projectStatus) {
 		this.projectStatus = projectStatus;
+	}
+
+	public Set<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
 	}
 
 }
