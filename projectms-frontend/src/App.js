@@ -29,6 +29,8 @@ import CreateTicket from './components/tickets/CreateTicket';
 import PrivateRoute from './components/privateRoute';
 import ClientHomePageComponent from './components/ClientHomePageComponent';
 import AdminRolePrivateRoute from './components/privateRoute/adminRole';
+import AdminAndEmployeeRolePrivateRoute from './components/privateRoute/adminAndEmployee';
+import AccessFalseComponent from './components/warning/AcessFalsePage';
 
 
 
@@ -51,7 +53,9 @@ function App() {
             <Route path='/clientHomepage'
               element={
                 <PrivateRoute>
+                  
                   <ClientHomePageComponent />
+                  
                 </PrivateRoute>
               } />
 
@@ -59,114 +63,149 @@ function App() {
             <Route path='/employees'
               element={
                 <PrivateRoute>
-                  <AdminRolePrivateRoute>
+                    <AdminAndEmployeeRolePrivateRoute>
                     <ListEmployeeComponent />
-                  </AdminRolePrivateRoute>
+                    </AdminAndEmployeeRolePrivateRoute>
                 </PrivateRoute>} />
             <Route path='/:id&employeeAdd=:add'
               element={
                 <PrivateRoute>
-                  <CreateEmployeeComponent />
+                  <AdminRolePrivateRoute>
+                    <CreateEmployeeComponent />
+                  </AdminRolePrivateRoute>
                 </PrivateRoute>
               } />
             <Route path='/:id&employeeView=:view'
               element={
-
+                <PrivateRoute>
+                <AdminAndEmployeeRolePrivateRoute>
                 <ViewEmployeeComponent />
-
+                </AdminAndEmployeeRolePrivateRoute>
+                </PrivateRoute>
               } />
             {/* Project */}
             <Route path='/projects'
               element={
-
+                <PrivateRoute>
+                  <AdminAndEmployeeRolePrivateRoute>
                 <ListProjectComponent />
-
+                </AdminAndEmployeeRolePrivateRoute>
+                </PrivateRoute>
               } />
             <Route path='/:id&projectAdd=:add'
               element={
-
+                <PrivateRoute>
+                <AdminAndEmployeeRolePrivateRoute>
                 <CreateProjectComponent />
-
+                </AdminAndEmployeeRolePrivateRoute>
+                </PrivateRoute>
               } />
             <Route path='/:id&viewProject=:view'
               element={
-
+                <PrivateRoute>
                 <ViewProjectComponent />
-
+                </PrivateRoute>
               } />
             {/* Client */}
             <Route path='/clients' element={
               <PrivateRoute>
+                <AdminAndEmployeeRolePrivateRoute>
                 <ListClientComponent />
+                </AdminAndEmployeeRolePrivateRoute>
               </PrivateRoute>
             } />
             <Route path='/:id&clientAdd=:add' element={
-
-              <CreateClientComponent />
-
+              <PrivateRoute>
+                 <AdminRolePrivateRoute>
+                  <CreateClientComponent />
+              </AdminRolePrivateRoute>
+              </PrivateRoute>
             } />
             <Route path='/:id&clientView=:view' element={
-
+              <PrivateRoute>
+                <AdminAndEmployeeRolePrivateRoute>
               <ViewClientComponent />
-
+              </AdminAndEmployeeRolePrivateRoute>
+              </PrivateRoute>
             } />
             {/* User */}
             <Route path='/users' element={
-
-              <ListUsersComponent />
-
+              <PrivateRoute>
+               <AdminRolePrivateRoute>
+                <ListUsersComponent />
+              </AdminRolePrivateRoute>
+              </PrivateRoute>
             } />
             <Route path='/:id' element={
-
+              <PrivateRoute>
+               <AdminRolePrivateRoute>
               <CreateUserComponent />
-
+              </AdminRolePrivateRoute>
+              </PrivateRoute>
             } />
             <Route path='/:id&viewUser=:view' element={
-
+              <PrivateRoute>
+              <AdminRolePrivateRoute>
               <ViewUserComponent />
-
+              </AdminRolePrivateRoute>
+              </PrivateRoute>
             } />
             {/* Task */}
             <Route path='/tasks' element={
-
+              <PrivateRoute>
+                <AdminAndEmployeeRolePrivateRoute>
               <ListTaskComponent />
-
+              </AdminAndEmployeeRolePrivateRoute>
+              </PrivateRoute>
             } />
             <Route path='/:id&taskAdd=:add' element={
-
+              <PrivateRoute>
+                <AdminAndEmployeeRolePrivateRoute>
               <CreateTaskComponent />
-
+              </AdminAndEmployeeRolePrivateRoute>
+              </PrivateRoute>
             } />
             <Route path='/:id&viewTask=:view' element={
-
+              <PrivateRoute>
               <ViewTaskComponent />
-
+              </PrivateRoute>
             } />
             {/* Calendar */}
             <Route path='/calendar' element={
-
+              <PrivateRoute>
               <CalendarComponent />
-
+              </PrivateRoute>
             } />
             {/* Chat Room */}
             <Route path='/chatroom' element={
-
+              <PrivateRoute>
+                <AdminAndEmployeeRolePrivateRoute>
               <ChatRoom />
-
+              </AdminAndEmployeeRolePrivateRoute>
+              </PrivateRoute>
             } />
             {/* Gantt */}
             <Route path='/gantt' element={
-
+              <PrivateRoute>
               <GanttExport />
-
+              </PrivateRoute>
             } />
             {/* Tickets */}
-            <Route path='/tickets' element={<ListTickets />} />
-            <Route path='/:id&ticketAdd=:add' element={<CreateTicket />} />
+            <Route path='/tickets' element={
+            <PrivateRoute>
+            <ListTickets />
+            </PrivateRoute>
+            } />
+            <Route path='/:id&ticketAdd=:add' element={
+            <PrivateRoute>
+            <CreateTicket />
+            </PrivateRoute>
+            } />
             {/* <Route path='/add-ticket' element={<CreateTicket />} /> */}
             {/* <Route path='/edit-ticket/:id' element={<CreateTicket />} /> */}
             {/* Login */}
             <Route path='/' element={<LoginComponent />} />
+            <Route path='/acessFasle' element={<AccessFalseComponent/>} />
           </Routes>
         </div>
       </Router>
