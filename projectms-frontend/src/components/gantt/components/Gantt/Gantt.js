@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
 import { gantt } from 'dhtmlx-gantt';
 import 'dhtmlx-gantt/codebase/dhtmlxgantt.css';
+import { useNavigate } from "react-router-dom";
 
-export default class Gantt extends Component {
+class Gantt extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dataProcessor: null,
+    }
+  };
+  
+ 
 
   // instance of gantt.dataProcessor
-  dataProcessor = null;
+  
+  
 
   initZoom() {
+   
+
     gantt.ext.zoom.init({
       levels: [
         {
@@ -41,6 +54,8 @@ export default class Gantt extends Component {
     });
   }
 
+   
+
   setZoom(value) {
     if(!gantt.ext.zoom.getLevels()){
       this.initZoom();
@@ -73,6 +88,15 @@ export default class Gantt extends Component {
   }
 
   componentDidMount() {
+  
+    gantt.attachEvent("onTaskCreated", function(id,item){
+    window.location.href=(`/_addTask&taskAdd=${"add"}`);
+ });
+
+ gantt.attachEvent("onTaskClick", function(id,item){
+  window.location.href =(`/${id}&viewTask=${"view"}`);
+});
+
     gantt.config.date_format = "%Y-%m-%d %H:%i";
     const { tasks } = this.props;
     gantt.init(this.ganttContainer);
@@ -98,3 +122,10 @@ export default class Gantt extends Component {
     );
   }
 }
+
+function WithNavigate(props) {
+  let navigate = useNavigate();
+  return <Gantt {...props} navigate={navigate} />;
+}
+
+export default WithNavigate;
