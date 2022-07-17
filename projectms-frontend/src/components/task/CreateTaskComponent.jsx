@@ -11,8 +11,8 @@ class CreateTaskComponent extends Component {
       id: this.props.match.params.id,
       taskName: "",
       taskDesc: "",
-      taskStartDate: new Date(),
-      taskDueDate: new Date(),
+      taskStartDate: "",
+      taskDueDate: "",
       taskStatus: "",
       taskType: "",
       taskPriority: "",
@@ -97,6 +97,7 @@ class CreateTaskComponent extends Component {
       taskPriority: this.state.taskPriority,
       // taskEmployees: this.state.taskEmployees,
     };
+    console.log(this.state.taskDueDate);
     // console.log('employee =>' + JSON.stringify(employee));
 
     if (this.state.id === "_addTask") {

@@ -1,5 +1,6 @@
 package com.urbanpiping.springboot.controller;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,10 +56,18 @@ public class ProjectController {
 		Project project = projectRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Project not exist with id: " + id));
 
+		Calendar start = Calendar.getInstance();
+		start.setTime(projectDetails.getProjectStartDate());
+		start.add(Calendar.DATE, -1);
+		
+		Calendar due = Calendar.getInstance();
+		due.setTime(projectDetails.getProjectDueDate());
+		due.add(Calendar.DATE, -1);
+		
 		project.setProjectName(projectDetails.getProjectName());
 		project.setProjectDesc(projectDetails.getProjectDesc());
-		project.setProjectStartDate(projectDetails.getProjectStartDate());
-		project.setProjectDueDate(projectDetails.getProjectDueDate());
+		project.setProjectStartDate(start.getTime());
+		project.setProjectDueDate(due.getTime());
 		project.setProjectCity(projectDetails.getProjectCity());
 		project.setProjectStreet(projectDetails.getProjectStreet());
 		project.setProjectProv(projectDetails.getProjectProv());
