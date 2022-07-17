@@ -12,19 +12,23 @@ import com.urbanpiping.springboot.model.User;
 public class NotificationService {
 
 	private JavaMailSender javaMailSender;
-	
+
 	@Autowired
 	public NotificationService(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
 	}
-	
+
 	public void sendNotification(User user) throws MailException {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		
+
 		mailMessage.setTo(user.getUserEmail());
-		mailMessage.setSubject("Your password");
-		mailMessage.setText("this is test"+ " "+ user.getPassword());
-		
+		mailMessage.setSubject("Urban Piping - Account Password");
+
+		String message = String.format("Hello %s,%n%nThis is a confirmation e-mail that your account was successfully "
+				+ "created within our system.%nHere's your account password: %s%n%n" + "Best Regards,%nUrban Piping Company",
+				user.getUserFirstName(), user.getUserPassword());
+		mailMessage.setText(message);
+
 		javaMailSender.send(mailMessage);
 	}
 }
