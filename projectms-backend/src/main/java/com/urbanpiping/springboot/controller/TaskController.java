@@ -72,7 +72,6 @@ public class TaskController {
 		task.setTaskStatus(taskDetails.getTaskStatus());
 		task.setTaskType(taskDetails.getTaskType());
 		task.setTaskPriority(taskDetails.getTaskPriority());
-		task.setTaskDuration(String.valueOf(start.getTime()));
 //		task.setEmployees(taskDetails.getEmployees());
 		
 		Task updatedTask = taskRepository.save(task);
