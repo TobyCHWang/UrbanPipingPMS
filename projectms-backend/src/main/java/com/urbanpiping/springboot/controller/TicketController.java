@@ -1,5 +1,6 @@
 package com.urbanpiping.springboot.controller;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,10 +55,14 @@ public class TicketController {
 		Ticket ticket = ticketRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Ticket not exist with id: " + id));
 
+		Calendar open = Calendar.getInstance();
+		open.setTime(ticketDetails.getTicketOpenedDate());
+		open.add(Calendar.DATE, -1);
+		
 		ticket.setTicketSubject(ticketDetails.getTicketSubject());
 		ticket.setTicketStatus(ticketDetails.getTicketStatus());
 		ticket.setTicketDetails(ticketDetails.getTicketDetails());
-		ticket.setTicketOpenedDate(ticketDetails.getTicketOpenedDate());
+		ticket.setTicketOpenedDate(open.getTime());
 		ticket.setTicketComment(ticketDetails.getTicketComment());
 
 		Ticket updatedTicket = ticketRepository.save(ticket);
