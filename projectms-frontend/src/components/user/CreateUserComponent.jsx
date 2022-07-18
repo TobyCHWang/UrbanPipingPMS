@@ -27,7 +27,7 @@ class CreateUserComponent extends Component {
   }
 
   componentDidMount() {
-    if (this.state.id === "_add") {
+    if (this.state.id === "_addUser") {
       return;
     } else {
       UserService.getUserById(this.state.id).then((res) => {
@@ -81,7 +81,7 @@ class CreateUserComponent extends Component {
     };
     console.log("user =>" + JSON.stringify(user));
 
-    if (this.state.id === "_add") {
+    if (this.state.id === "_addUser") {
       UserService.createUser(user).then((res) => {
         this.props.navigate(`/users`);
       });
@@ -97,7 +97,7 @@ class CreateUserComponent extends Component {
   }
 
   getTitle() {
-    if (this.state.id === "_add") {
+    if (this.state.id === "_addUser") {
       return <h3 className="text-center">Add User</h3>;
     } else {
       return <h3 className="text-center">Update User</h3>;

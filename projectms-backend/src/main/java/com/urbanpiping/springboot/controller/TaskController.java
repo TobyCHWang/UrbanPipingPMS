@@ -1,5 +1,7 @@
 package com.urbanpiping.springboot.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +24,7 @@ import com.urbanpiping.springboot.repository.TaskRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/auth/")
 public class TaskController {
 
 	@Autowired
@@ -44,24 +46,33 @@ public class TaskController {
 	@GetMapping("/tasks/{id}")
 	public ResponseEntity<Task> getEmployeeById(@PathVariable Long id) {
 		Task task = taskRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Task not exist withid: " + id));
+				.orElseThrow(() -> new ResourceNotFoundException("Task not exist with id: " + id));
 		return ResponseEntity.ok(task);
 	}
 
 	// update employee rest api
 	@PutMapping("/tasks/{id}")
 	public ResponseEntity<Task> updateEmployee(@PathVariable Long id, @RequestBody Task taskDetails) {
-
+		
 		Task task = taskRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Task not exist with id: " + id));
 
+		Calendar start = Calendar.getInstance();
+		start.setTime(taskDetails.getTaskStartDate());
+		start.add(Calendar.DATE, -1);
+		
+		Calendar due = Calendar.getInstance();
+		due.setTime(taskDetails.getTaskDueDate());
+		due.add(Calendar.DATE, -1);
+		
 		task.setTaskName(taskDetails.getTaskName());
 		task.setTaskDesc(taskDetails.getTaskDesc());
-		task.setTaskStartDate(taskDetails.getTaskStartDate());
-		task.setTaskDueDate(taskDetails.getTaskDueDate());
+		task.setTaskStartDate(start.getTime());
+		task.setTaskDueDate(due.getTime());
 		task.setTaskStatus(taskDetails.getTaskStatus());
 		task.setTaskType(taskDetails.getTaskType());
 		task.setTaskPriority(taskDetails.getTaskPriority());
+//		task.setEmployees(taskDetails.getEmployees());
 		
 		Task updatedTask = taskRepository.save(task);
 		return ResponseEntity.ok(updatedTask);

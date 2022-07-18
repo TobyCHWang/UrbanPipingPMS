@@ -16,6 +16,7 @@ class CreateTaskComponent extends Component {
       taskStatus: "",
       taskType: "",
       taskPriority: "",
+      // taskEmployees: "",
     };
 
     this.changeTaskNameHandler = this.changeTaskNameHandler.bind(this);
@@ -26,6 +27,7 @@ class CreateTaskComponent extends Component {
     this.changeTaskStatusHandler = this.changeTaskStatusHandler.bind(this);
     this.changeTaskTypeHandler = this.changeTaskTypeHandler.bind(this);
     this.changeTaskPriorityHandler = this.changeTaskPriorityHandler.bind(this);
+    // this.changeTaskEmployeesHandler = this.changeTaskEmployeesHandler.bind(this);
     this.save = this.save.bind(this);
     this.cancel = this.cancel.bind(this);
   }
@@ -44,6 +46,7 @@ class CreateTaskComponent extends Component {
           taskStatus: project.taskStatus,
           taskType: project.taskType,
           taskPriority: project.taskPriority,
+          // taskEmployees: project.taskEmployees,
         });
       });
     }
@@ -77,6 +80,10 @@ class CreateTaskComponent extends Component {
     this.setState({ taskPriority: event.target.value });
   };
 
+  // changeTaskEmployeesHandler = (event) => {
+  //   this.setState({ taskEmployees: event.target.value });
+  // };
+
   save = (e) => {
     e.preventDefault();
 
@@ -88,7 +95,9 @@ class CreateTaskComponent extends Component {
       taskStatus: this.state.taskStatus,
       taskType: this.state.taskType,
       taskPriority: this.state.taskPriority,
+      // taskEmployees: this.state.taskEmployees,
     };
+    console.log(this.state.taskDueDate);
     // console.log('employee =>' + JSON.stringify(employee));
 
     if (this.state.id === "_addTask") {
@@ -143,6 +152,7 @@ class CreateTaskComponent extends Component {
                       onChange={this.changeTaskDescHandler}
                     />
                   </div>
+
                   <div className="form-group">
                     <label>Task Start Date: </label>
                     <input
@@ -202,8 +212,10 @@ class CreateTaskComponent extends Component {
                     <label>Employee: </label>
                     <input
                       placeholder="Employee"
-                      name="employee"
+                      name="taskEmployees"
                       className="form-control"
+                      // value={this.state.taskEmployees}
+                      // onChange={this.changeTaskEmployeesHandler}
                     />
                   </div>
                 </form>
