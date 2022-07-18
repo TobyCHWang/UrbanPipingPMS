@@ -2,33 +2,33 @@ import React, { Component } from "react";
 import Gantt from "./components/Gantt";
 import Toolbar from "./components/Toolbar";
 import MessageArea from "./components/MessageArea";
+import { useState } from "react";
+import { useEffect } from "react";
+import TaskService from "../../services/TaskService";
 
-const data = {
-  data: [
-    {
-      id: 1,
-      text: "Task #1",
-      start_date: "2020-02-12",
-      duration: 3,
+function GanttExport() {
+  const [currentZoom, setCurrentZoom] = useState("Days");
+  const [messages, setMessages] = useState([]);
+  const [taskList, setTaskList] = useState([]);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    TaskService.getTasks().then((response) => {
+      setTaskList(response.data);
+    });
+  }, []);
+
+  const events = taskList.map((res) => {
+    return {
+      id: res.taskId,
+      text: res.taskName,
+      start_date: res.taskStartDate,
+      duration: res.taskDuration,
       progress: 0.6,
-    },
-    {
-      id: 2,
-      text: "Task #2",
-      start_date: "2020-02-16",
-      duration: 3,
-      progress: 0.4,
-    },
-  ],
-  links: [{ id: 1, source: 1, target: 2, type: "0" }],
-};
-class GanttExport extends Component {
-  state = {
-    currentZoom: "Days",
-    messages: [],
-  };
+    };
+  });
 
-  addMessage(message) {
+  const addMessage = (message) => {
     const maxLogLength = 5;
     const newMessage = { message };
     const messages = [newMessage, ...this.state.messages];
@@ -36,42 +36,51 @@ class GanttExport extends Component {
     if (messages.length > maxLogLength) {
       messages.length = maxLogLength;
     }
-    this.setState({ messages });
-  }
+    setMessages({ messages });
+  };
 
-  logDataUpdate = (type, action, item, id) => {
+  const logDataUpdate = (type, action, item, id) => {
     let text = item && item.text ? ` (${item.text})` : "";
     let message = `${type} ${action}: ${id} ${text}`;
     if (type === "link" && action !== "delete") {
       message += ` ( source: ${item.source}, target: ${item.target} )`;
     }
-    this.addMessage(message);
+    addMessage(message);
   };
 
-  handleZoomChange = (zoom) => {
-    this.setState({
-      currentZoom: zoom,
-    });
+  const handleZoomChange = (zoom) => {
+    setCurrentZoom(zoom);
+  };
+  const dataEvent = {
+    data: events,
+    links: [{ id: 1, source: 1, target: 2, type: "0" }],
   };
 
-  render() {
-    const { currentZoom, messages } = this.state;
-    return (
-      <div>
-        <div className="zoom-bar">
-          <Toolbar zoom={currentZoom} onZoomChange={this.handleZoomChange} />
-        </div>
+  return (
+    <div>
+      <button
+        onClick={() => {
+          setShow(!show);
+        }}
+      >
+        Show your Ganatt Chart
+      </button>
+
+      {show && (
         <div className="gantt-container">
+          <div className="zoom-bar">
+            <Toolbar zoom={currentZoom} onZoomChange={handleZoomChange} />
+          </div>
           <Gantt
-            tasks={data}
+            tasks={dataEvent}
             zoom={currentZoom}
-            onDataUpdated={this.logDataUpdate}
+            onDataUpdated={logDataUpdate}
           />
+          <MessageArea messages={messages} />
         </div>
-        <MessageArea messages={messages} />
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 }
 
 export default GanttExport;

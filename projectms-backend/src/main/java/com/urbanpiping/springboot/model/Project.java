@@ -1,15 +1,21 @@
 package com.urbanpiping.springboot.model;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "projects")
@@ -27,11 +33,11 @@ public class Project {
 	private String projectDesc;
 
 	@Column(name = "projectStartDate")
-//	@JsonFormat(pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
 	private Date projectStartDate;
 
 	@Column(name = "projectDueDate")
-//	@JsonFormat(pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
 	private Date projectDueDate;
 
 	@Column(name = "projectCity")
@@ -49,7 +55,9 @@ public class Project {
 	@Column(name = "projectStatus")
 	private String projectStatus;
 
-//	private int clientId;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "proj_task_fk", referencedColumnName = "projectId")
+	Set<Task> tasks = new HashSet<>();
 
 	public Project() {
 
@@ -99,7 +107,10 @@ public class Project {
 	}
 
 	public void setProjectStartDate(Date projectStartDate) {
-		this.projectStartDate = projectStartDate;
+		Calendar c = Calendar.getInstance();
+		c.setTime(projectStartDate);
+		c.add(Calendar.DATE, 1);
+		this.projectStartDate = c.getTime();
 	}
 
 	public Date getProjectDueDate() {
@@ -107,7 +118,10 @@ public class Project {
 	}
 
 	public void setProjectDueDate(Date projectDueDate) {
-		this.projectDueDate = projectDueDate;
+		Calendar c = Calendar.getInstance();
+		c.setTime(projectDueDate);
+		c.add(Calendar.DATE, 1);
+		this.projectDueDate = c.getTime();
 	}
 
 	public String getProjectCity() {
@@ -148,6 +162,14 @@ public class Project {
 
 	public void setProjectStatus(String projectStatus) {
 		this.projectStatus = projectStatus;
+	}
+
+	public Set<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
 	}
 
 }

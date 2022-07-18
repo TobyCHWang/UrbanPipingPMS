@@ -44,7 +44,7 @@ class CreateClientComponent extends Component {
   }
 
   componentDidMount() {
-    if (this.state.id === "_add") {
+    if (this.state.id === "_addClient") {
       return;
     } else {
       ClientService.getClientById(this.state.id).then((res) => {
@@ -110,7 +110,7 @@ class CreateClientComponent extends Component {
     };
     console.log("client =>" + JSON.stringify(client));
 
-    if (this.state.id === "_add") {
+    if (this.state.id === "_addClient") {
       ClientService.createClient(client).then((res) => {
         this.props.navigate(`/clients`);
       });
@@ -126,7 +126,7 @@ class CreateClientComponent extends Component {
   }
 
   getTitle() {
-    if (this.state.id === "_add") {
+    if (this.state.id === "_addClient") {
       return <h3 className="text-center">Add Client</h3>;
     } else {
       return <h3 className="text-center">Update Client</h3>;

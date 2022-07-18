@@ -1,15 +1,23 @@
 package com.urbanpiping.springboot.model;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tasks")
@@ -27,11 +35,11 @@ public class Task {
 	private String taskDesc;
 
 	@Column(name = "taskStartDate")
-//	@JsonFormat(pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
 	private Date taskStartDate;
 
 	@Column(name = "taskDueDate")
-//	@JsonFormat(pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
 	private Date taskDueDate;
 
 	@Column(name = "taskStatus")
@@ -43,16 +51,22 @@ public class Task {
 	@Column(name = "taskPriority")
 	private String taskPriority;
 
-//	private int employeeId;
-//	private int photoId;
+	@Column(name = "taskDuration")
+	private String taskDuration;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "tasks_employees", joinColumns = { @JoinColumn(name = "taskId") }, inverseJoinColumns = {
+			@JoinColumn(name = "empId") })
+	private Set<Employee> employees = new HashSet<>();
 
 	public Task() {
 
 	}
 
-	public Task(String taskName, String taskDesc, Date taskStartDate, Date taskDueDate, String taskStatus,
+	public Task(long taskId, String taskName, String taskDesc, Date taskStartDate, Date taskDueDate, String taskStatus,
 			String taskType, String taskPriority) {
 		super();
+		this.taskId = taskId;
 		this.taskName = taskName;
 		this.taskDesc = taskDesc;
 		this.taskStartDate = taskStartDate;
@@ -91,7 +105,10 @@ public class Task {
 	}
 
 	public void setTaskStartDate(Date taskStartDate) {
-		this.taskStartDate = taskStartDate;
+		Calendar c = Calendar.getInstance();
+		c.setTime(taskStartDate);
+		c.add(Calendar.DATE, 1);
+		this.taskStartDate = c.getTime();
 	}
 
 	public Date getTaskDueDate() {
@@ -99,7 +116,18 @@ public class Task {
 	}
 
 	public void setTaskDueDate(Date taskDueDate) {
-		this.taskDueDate = taskDueDate;
+		Calendar c = Calendar.getInstance();
+		c.setTime(taskDueDate);
+		c.add(Calendar.DATE, 1);
+		this.taskDueDate = c.getTime();
+	}
+
+	public String getTaskDuration() {
+		return taskDuration;
+	}
+
+	public void setTaskDuration(String taskDuration) {
+		this.taskDuration = taskDuration;
 	}
 
 	public String getTaskStatus() {
@@ -124,6 +152,14 @@ public class Task {
 
 	public void setTaskPriority(String taskPriority) {
 		this.taskPriority = taskPriority;
+	}
+
+	public Set<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set<Employee> employees) {
+		this.employees = employees;
 	}
 
 }
