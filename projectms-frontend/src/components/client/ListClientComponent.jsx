@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { useNavigate } from "react-router-dom";
 import ClientService from "../../services/ClientService";
+import "./ClientComponent.css";
+import { Container, Button, Table, Card } from "react-bootstrap";
+import {
+  BsPlusSquareFill,
+  BsPencilSquare,
+  BsTrash,
+  BsEye,
+} from "react-icons/bs";
 
 class ListClientComponent extends Component {
   constructor(props) {
@@ -42,63 +50,75 @@ class ListClientComponent extends Component {
   render() {
     return (
       <div>
-        <h2 className="text-center">Client List</h2>
-        <div className="row">
-          <button className="btn btn-primary" onClick={this.addClient}>
-            Add Client
-          </button>
-        </div>
-        <div className="row">
-          <table className="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Contact No</th>
-                <th>Street Address</th>
-                <th>City</th>
-                <th>Province</th>
-                <th>Postal Code</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.clients.map((client) => (
-                <tr key={client.clientId}>
-                  <td> {client.clientFirstName} </td>
-                  <td> {client.clientLastName} </td>
-                  <td> {client.clientEmail} </td>
-                  <td> {client.clientContact} </td>
-                  <td> {client.clientStreet} </td>
-                  <td> {client.clientCity} </td>
-                  <td> {client.clientProvince} </td>
-                  <td> {client.clientPostalCode} </td>
-                  <td>
-                    <button
-                      className="btn btn-info"
-                      onClick={() => this.editClient(client.clientId)}
-                    >
-                      Update
-                    </button>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => this.deleteClient(client.clientId)}
-                    >
-                      Delete
-                    </button>
-                    <button
-                      className="btn btn-info"
-                      onClick={() => this.viewClient(client.clientId)}
-                    >
-                      View
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <Container className="mt-5">
+          <Card className="mx-auto shadow p-3 mb-5 bg-white rounded">
+            <Card.Body className="mt-2">
+              <Card.Title>
+                <p>
+                  <h3 className="text-center">Client List</h3>
+                </p>
+              </Card.Title>
+              <Card.Text>
+                <div className="buttonRight">
+                  <Button variant="flat" onClick={this.addClient}>
+                    <BsPlusSquareFill /> New
+                  </Button>
+                </div>
+                <Table hover responsive className="mx-auto mt-2">
+                  <thead>
+                    <tr>
+                      <th className="text-uppercase fw-light lh-1">Name</th>
+                      <th className="text-uppercase fw-light lh-1">Email</th>
+                      <th className="text-uppercase fw-light lh-1">Phone No.</th>
+                      <th className="text-uppercase fw-light lh-1">Address</th>
+                      <th className="text-uppercase fw-light lh-1">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.clients.map((client) => (
+                      <tr key={client.clientId}>
+                        <td>
+                          {" "}
+                          {client.clientFirstName} {client.clientLastName}{" "}
+                        </td>
+                        <td> {client.clientEmail} </td>
+                        <td> {client.clientContact} </td>
+                        <td>
+                          {" "}
+                          {client.clientStreet} {client.clientCity},{" "}
+                          {client.clientProvince} {client.clientPostalCode}
+                        </td>
+                        <td>
+                          <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={() => this.editClient(client.clientId)}
+                          >
+                            <BsPencilSquare />
+                          </Button>
+                          <Button
+                            variant="danger"
+                            size="sm"
+                            onClick={() => this.deleteClient(client.clientId)}
+                          >
+                            <BsTrash />
+                          </Button>
+                          <Button
+                            variant="info"
+                            size="sm"
+                            onClick={() => this.viewClient(client.clientId)}
+                          >
+                            <BsEye />
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Container>
       </div>
     );
   }
